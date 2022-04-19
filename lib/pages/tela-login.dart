@@ -18,6 +18,9 @@ class _LoginPageState extends State<LoginPage> {
 
   bool passwordVisibility = false;
 
+  FocusNode focusNodeSenha = FocusNode();
+  FocusNode focusNodeLogin = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -35,10 +38,12 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             const Divider(
               color: Color.fromARGB(0, 255, 255, 255),
+              height: 70,
             ),
             CarregarFoto(),
             const Divider(
               color: Color.fromARGB(0, 255, 255, 255),
+              height: 50,
             ),
             CampoUsuario(),
             const Divider(
@@ -57,13 +62,18 @@ class _LoginPageState extends State<LoginPage> {
 
   ElevatedButton ButtonLogar() {
     return ElevatedButton.icon(
+      focusNode: focusNodeSenha,
       onPressed: () {
-        Login teste = Login(txtUsuarioController.text, txtSenhaController.text);
-        debugPrint('Usuário ' + teste.usuario + '\nSenha: ' + teste.senha);
+        Logar(txtUsuarioController.text, txtSenhaController.text);
       },
       icon: const Icon(Icons.login, size: 25),
       label: const Text("Login"),
     );
+  }
+
+  void Logar(String usuario, String senha) {
+    Login teste = Login(usuario, senha);
+    debugPrint('Usuário ' + teste.usuario + '\nSenha: ' + teste.senha);
   }
 
   TextFormField CampoSenha() {
@@ -71,6 +81,8 @@ class _LoginPageState extends State<LoginPage> {
       keyboardType: TextInputType.text,
       obscureText: !passwordVisibility,
       controller: txtSenhaController,
+      focusNode: focusNodeSenha,
+      onFieldSubmitted: (String teste) => {Logar('b', 'a')},
       decoration: InputDecoration(
         icon: const Icon(Icons.password_rounded),
         labelText: 'Senha',
@@ -117,6 +129,11 @@ class _LoginPageState extends State<LoginPage> {
     return TextFormField(
       keyboardType: TextInputType.text,
       controller: txtUsuarioController,
+      onFieldSubmitted: (String teste) => {
+        focusNodeSenha.requestFocus(),
+        txtUsuarioController.text.toLowerCase()
+      },
+      onEditingComplete: () => {txtUsuarioController.text.toLowerCase()},
       decoration: const InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
           icon: Icon(Icons.person),
@@ -132,8 +149,8 @@ class _LoginPageState extends State<LoginPage> {
     return SizedBox(
         child: Image.network(
       'https://www.ielb.org.br/public/download/281/simbolo-rgb.png.png',
-      width: 100,
-      height: 100,
+      width: 128,
+      height: 150,
       fit: BoxFit.scaleDown,
     ));
   }
