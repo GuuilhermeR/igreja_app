@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../login/login.dart';
+import '../services/auth-services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -53,7 +54,11 @@ class _LoginPageState extends State<LoginPage> {
             const Divider(
               color: Color.fromARGB(0, 255, 255, 255),
             ),
-            ButtonLogar()
+            ButtonLogar(),
+            const Divider(
+              color: Color.fromARGB(0, 255, 255, 255),
+            ),
+            ButtonCadastrar()
           ],
         ),
       ),
@@ -75,7 +80,9 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton.icon(
       focusNode: focusNodeSenha,
       onPressed: () {
-        Logar(txtUsuarioController.text, txtSenhaController.text);
+        // AuthService autenticar = AuthService();
+        // autenticar.createUser(
+        //     txtUsuarioController.text, txtSenhaController.text);
       },
       icon: const Icon(Icons.people_outline_sharp, size: 25),
       label: const Text("Cadastrar"),
