@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, non_constant_identifier_names
+// ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
 
@@ -68,6 +68,17 @@ class _LoginPageState extends State<LoginPage> {
       },
       icon: const Icon(Icons.login, size: 25),
       label: const Text("Login"),
+    );
+  }
+
+  ElevatedButton ButtonCadastrar() {
+    return ElevatedButton.icon(
+      focusNode: focusNodeSenha,
+      onPressed: () {
+        Logar(txtUsuarioController.text, txtSenhaController.text);
+      },
+      icon: const Icon(Icons.people_outline_sharp, size: 25),
+      label: const Text("Cadastrar"),
     );
   }
 

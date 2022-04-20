@@ -1,0 +1,39 @@
+{
+    "project_info": {
+      "project_number": "769892937486",
+      "project_id": "siteigrejaluterana",
+      "storage_bucket": "siteigrejaluterana.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:769892937486:android:2ddbd0e861aef668e1b15f",
+          "android_client_info": {
+            "package_name": "com.igreja.ielb.jaragua"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "769892937486-uhb1a4ab9udf6p35fjgna4amv6g7b1ik.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyAkhHh3VEAv4LiZpGwIqbACm7odgX231Dg"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "769892937486-uhb1a4ab9udf6p35fjgna4amv6g7b1ik.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
