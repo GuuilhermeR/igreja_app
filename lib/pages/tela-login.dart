@@ -70,6 +70,8 @@ class _LoginPageState extends State<LoginPage> {
       focusNode: focusNodeSenha,
       onPressed: () {
         Logar(txtUsuarioController.text, txtSenhaController.text);
+        AuthService autenticar = AuthService();
+        autenticar.loginAnony();
       },
       icon: const Icon(Icons.login, size: 25),
       label: const Text("Login"),
@@ -80,9 +82,9 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton.icon(
       focusNode: focusNodeSenha,
       onPressed: () {
-        // AuthService autenticar = AuthService();
-        // autenticar.createUser(
-        //     txtUsuarioController.text, txtSenhaController.text);
+        AuthService autenticar = AuthService();
+        autenticar.createUser(
+            txtUsuarioController.text, txtSenhaController.text);
       },
       icon: const Icon(Icons.people_outline_sharp, size: 25),
       label: const Text("Cadastrar"),

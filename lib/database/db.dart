@@ -5,26 +5,26 @@
 // import 'package:path/path.dart';
 
 class DB {
-  // DB._();
-  // static final DB instance = DB._();
-  // static Database _database;
+//   DB._();
+//   static final DB instance = DB._();
+//   static Database _database;
 
-  // Future<Database> get database async {
-  //   return _database ??= await initDatabase();
-  // }
+//   Future<Database> get database async {
+//     return _database ??= await initDatabase();
+//   }
 
-  // static get() async {
-  //   return await DB.instance.database;
-  // }
+//   static get() async {
+//     return await DB.instance.database;
+//   }
 
-  // initDatabase() async {
-  //   return await openDatabase(
-  //     join(await getDatabasesPath(), 'dadostimes_api3.db'),
-  //     version: 1,
-  //     onCreate: (db, versao) async {
-  //       //await db.execute(times);
-  //       //await setupTimes(db);
-  //     },
-  //   );
-  // }
+//   initDatabase() async {
+//     return await openDatabase(
+//       join(await getDatabasesPath(), 'dadostimes_api3.db'),
+//       version: 1,
+//       onCreate: (db, versao) async {
+//         //await db.execute(times);
+//         //await setupTimes(db);
+//       },
+//     );
+//   }
 }
