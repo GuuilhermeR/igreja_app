@@ -1,8 +1,15 @@
-import 'package:igreja_app/pages/tela-login.dart';
+import 'package:igreja_app/pages/login/tela-login.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:igreja_app/AppComponent/app_module.dart';
+import 'package:igreja_app/AppComponent/app_widget.dart';
 
 Future<void> main() async {
-  runApp(const MyApp());
+  Modular.setInitialRoute('/login/');
+  runApp(ModularApp(
+    module: AppModule(),
+    child: const AppWidget(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

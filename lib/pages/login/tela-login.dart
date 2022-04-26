@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Services/login_service.dart';
-import 'package:igreja_app/Services/route_service.dart';
 import 'package:igreja_app/Widgets/custom_toast.dart';
+import 'package:igreja_app/services/route_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -99,7 +99,10 @@ class _LoginPageState extends State<LoginPage> {
   ElevatedButton ButtonCadastrar() {
     return ElevatedButton.icon(
       focusNode: focusNodeSenha,
-      onPressed: () {},
+      onPressed: () {
+        RouteService routeService = RouteService();
+        routeService.registerUser();
+      },
       icon: const Icon(Icons.logout, size: 25),
       label: const Text("Cadastrar"),
     );
