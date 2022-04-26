@@ -1,9 +1,14 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
+import 'package:dio/dio.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../login/login.dart';
-import '../services/auth-services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:igreja_app/Models/CustomException/custom_exception.dart';
+import 'package:igreja_app/Models/User/user.dart';
+import 'package:igreja_app/Services/login_service.dart';
+import 'package:igreja_app/Services/route_service.dart';
+import 'package:igreja_app/Widgets/custom_toast.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -65,13 +70,31 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void logar() {
+    User user =
+        User(txtUsuarioController.value.text, txtSenhaController.value.text);
+    if (user.userId.isEmpty) {
+      CustomToast.showError("Informe o usuário!");
+    } else if (user.password.isEmpty) {
+      CustomToast.showError("Informe a senha!");
+    } else {
+      LoginService _loginService = LoginService();
+      _loginService.login(user).then((value) {
+        if (value != null) {
+          RouteService routeService = RouteService();
+          routeService.home();
+        }
+      }).catchError((error) {
+        CustomToast.showError(error.toString());
+      });
+    }
+  }
+
   ElevatedButton ButtonLogar() {
     return ElevatedButton.icon(
       focusNode: focusNodeSenha,
       onPressed: () {
-        Logar(txtUsuarioController.text, txtSenhaController.text);
-        AuthService autenticar = AuthService();
-        autenticar.loginAnony();
+        logar();
       },
       icon: const Icon(Icons.login, size: 25),
       label: const Text("Login"),
@@ -81,19 +104,10 @@ class _LoginPageState extends State<LoginPage> {
   ElevatedButton ButtonCadastrar() {
     return ElevatedButton.icon(
       focusNode: focusNodeSenha,
-      onPressed: () {
-        AuthService autenticar = AuthService();
-        autenticar.createUser(
-            txtUsuarioController.text, txtSenhaController.text);
-      },
+      onPressed: () {},
       icon: const Icon(Icons.people_outline_sharp, size: 25),
       label: const Text("Cadastrar"),
     );
-  }
-
-  void Logar(String usuario, String senha) {
-    Login teste = Login(usuario, senha);
-    debugPrint('Usuário ' + teste.usuario + '\nSenha: ' + teste.senha);
   }
 
   TextFormField CampoSenha() {
@@ -102,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
       obscureText: !passwordVisibility,
       controller: txtSenhaController,
       focusNode: focusNodeSenha,
-      onFieldSubmitted: (String teste) => {Logar('b', 'a')},
+      onFieldSubmitted: (String teste) => {logar()},
       decoration: InputDecoration(
         icon: const Icon(Icons.password_rounded),
         labelText: 'Senha',
