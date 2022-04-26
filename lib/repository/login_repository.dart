@@ -1,10 +1,5 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
 
-// import 'package:dio/dio.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Repository/base_repository.dart';
 import 'package:igreja_app/Services/jwt_service.dart';

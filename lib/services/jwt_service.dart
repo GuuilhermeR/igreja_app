@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:igreja_app/Services/shared_preferences_utils.dart';
 
 class JwtService {

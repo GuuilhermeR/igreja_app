@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Repository/user_repository.dart';
 

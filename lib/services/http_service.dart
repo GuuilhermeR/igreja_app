@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:igreja_app/Services/jwt_service.dart';
-import 'package:igreja_app/Services/jwt_service.dart';
 
 class HttpService {
   Future<dynamic> post(String url, dynamic object) async {

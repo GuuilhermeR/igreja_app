@@ -1,10 +1,6 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
-import 'package:dio/dio.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:igreja_app/Models/CustomException/custom_exception.dart';
 import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Services/login_service.dart';
 import 'package:igreja_app/Services/route_service.dart';
@@ -81,8 +77,7 @@ class _LoginPageState extends State<LoginPage> {
       LoginService _loginService = LoginService();
       _loginService.login(user).then((value) {
         if (value != null) {
-          RouteService routeService = RouteService();
-          routeService.home();
+          CustomToast.showSucess("Você logou!");
         }
       }).catchError((error) {
         CustomToast.showError(error.toString());
@@ -105,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
     return ElevatedButton.icon(
       focusNode: focusNodeSenha,
       onPressed: () {},
-      icon: const Icon(Icons.people_outline_sharp, size: 25),
+      icon: const Icon(Icons.logout, size: 25),
       label: const Text("Cadastrar"),
     );
   }
