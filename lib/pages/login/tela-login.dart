@@ -34,6 +34,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('IELB - Jaraguá do Sul'),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
@@ -87,7 +91,6 @@ class _LoginPageState extends State<LoginPage> {
 
   ElevatedButton ButtonLogar() {
     return ElevatedButton.icon(
-      focusNode: focusNodeSenha,
       onPressed: () {
         logar();
       },
@@ -98,13 +101,12 @@ class _LoginPageState extends State<LoginPage> {
 
   ElevatedButton ButtonCadastrar() {
     return ElevatedButton.icon(
-      focusNode: focusNodeSenha,
       onPressed: () {
         RouteService routeService = RouteService();
         routeService.registerUser();
       },
       icon: const Icon(Icons.logout, size: 25),
-      label: const Text("Cadastrar"),
+      label: const Text("Cadastrar-se"),
     );
   }
 
@@ -113,34 +115,13 @@ class _LoginPageState extends State<LoginPage> {
       keyboardType: TextInputType.text,
       obscureText: !passwordVisibility,
       controller: txtSenhaController,
-      focusNode: focusNodeSenha,
-      onFieldSubmitted: (String teste) => {logar()},
+      // onFieldSubmitted: (String teste) => {logar()},
       decoration: InputDecoration(
-        icon: const Icon(Icons.password_rounded),
+        icon: const Icon(Icons.password),
         labelText: 'Senha',
         contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
         labelStyle: const TextStyle(
             color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 16),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.black38,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(4.0),
-            topRight: Radius.circular(4.0),
-          ),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.black38,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(4.0),
-            topRight: Radius.circular(4.0),
-          ),
-        ),
         suffixIcon: InkWell(
           onTap: () => setState(
             () => passwordVisibility = !passwordVisibility,

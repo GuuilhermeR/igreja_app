@@ -18,10 +18,33 @@ TextEditingController txtUsuarioController = TextEditingController();
 TextEditingController txtSenhaController = TextEditingController();
 bool passwordVisibility = false;
 
+FocusNode focusNodeNome = FocusNode();
+FocusNode focusNodeUsuario = FocusNode();
+FocusNode focusNodeSenha = FocusNode();
+FocusNode focusDataNascimento = FocusNode();
+
 class _RegisterPageState extends State<RegisterPage> {
+  @override
+  void initState() {
+    super.initState();
+    txtUsuarioController = TextEditingController();
+    txtSenhaController = TextEditingController();
+    passwordVisibility = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Cadastro'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            RouteService routeService = RouteService();
+            routeService.login();
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: ListView(
@@ -38,8 +61,14 @@ class _RegisterPageState extends State<RegisterPage> {
             CampoUsuario(),
             const Divider(
               color: Color.fromARGB(0, 255, 255, 255),
+              height: 50,
             ),
             CampoSenha(),
+            const Divider(
+              color: Color.fromARGB(0, 255, 255, 255),
+              height: 50,
+            ),
+            dtNascimento(),
           ],
         ),
       ),
@@ -122,5 +151,20 @@ TextFormField CampoSenha() {
         ),
       ),
     ),
+  );
+}
+
+TextFormField dtNascimento() {
+  return TextFormField(
+    keyboardType: TextInputType.datetime,
+    controller: txtUsuarioController,
+    onFieldSubmitted: (String teste) =>
+        {txtUsuarioController.text.toLowerCase()},
+    decoration: const InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+        icon: Icon(Icons.calendar_month),
+        labelText: 'Data Nascimento',
+        labelStyle: TextStyle(
+            color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 16)),
   );
 }
