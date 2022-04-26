@@ -21,7 +21,7 @@ class CustomToast {
         gravity: ToastGravity.BOTTOM,
         webBgColor: "linear-gradient(to right, #F03801, #EB1C01)",
         backgroundColor: Colors.red,
-        webPosition: "top",
+        webPosition: "bottom",
         textColor: Colors.white,
         fontSize: 12,
         timeInSecForIosWeb: 10,
