@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:igreja_app/pages/feedpage/feed.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -20,8 +21,9 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text('Início', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+    FeedPage(),
     Text('Feed', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+    Text('Bíblia', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
     Text('Configuração',
         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
   ];
@@ -32,7 +34,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  @override
   _HomePageState createState() => _HomePageState();
 
   @override
@@ -52,8 +53,12 @@ class _HomePageState extends State<HomePage> {
                 label: ('Início'),
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
-                icon: Icon(Icons.feed),
-                label: ('Feed'),
+                icon: Icon(Icons.bookmark),
+                label: ('Bíblia'),
+                backgroundColor: Colors.blue),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.live_tv),
+                label: ('Ao vivo'),
                 backgroundColor: Colors.blue),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
