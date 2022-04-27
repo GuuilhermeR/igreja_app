@@ -81,7 +81,8 @@ class _LoginPageState extends State<LoginPage> {
       LoginService _loginService = LoginService();
       _loginService.login(user).then((value) {
         if (value != null) {
-          CustomToast.showSucess("Você logou!");
+          RouteService routeService = RouteService();
+          routeService.home();
         }
       }).catchError((error) {
         CustomToast.showError(error.toString());

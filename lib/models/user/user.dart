@@ -6,6 +6,8 @@ part 'user.g.dart';
 class User {
   final String userId;
   final String password;
+  // final String nome;
+  // final String dataNasc;
 
   User(this.userId, this.password);
 

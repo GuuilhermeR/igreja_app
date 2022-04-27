@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Services/user_service.dart';
 import 'package:igreja_app/Widgets/custom_toast.dart';
@@ -186,10 +187,33 @@ TextFormField dtNascimento() {
 ElevatedButton ButtonCadastrar() {
   return ElevatedButton.icon(
     onPressed: () {
-      RouteService routeService = RouteService();
-      routeService.registerUser();
+      registrar();
     },
     icon: const Icon(Icons.logout, size: 25),
     label: const Text("Cadastrar-se"),
   );
+}
+
+void goToLogin() {
+  Modular.to.navigate('/login/');
+}
+
+void registrar() {
+  User user =
+      User(txtUsuarioController.value.text, txtSenhaController.value.text);
+  if (user.userId.isEmpty) {
+    CustomToast.showError("Informe o usuário!");
+  } else if (user.password.isEmpty) {
+    CustomToast.showError("Informe a senha!");
+  } else {
+    UserService _userService = UserService();
+    try {
+      _userService.createUser(user).then((value) {
+        RouteService routeService = RouteService();
+        routeService.home();
+      });
+    } on Exception catch (error) {
+      CustomToast.showError(error.toString());
+    }
+  }
 }

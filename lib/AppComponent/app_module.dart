@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/AppComponent/router_outlet_controller.dart';
 import 'package:igreja_app/AppComponent/router_outlet_widget.dart';
+import 'package:igreja_app/pages/home/home-module.dart';
 import 'package:igreja_app/pages/login/tela-login-module.dart';
 import 'package:igreja_app/pages/register/register-user-module.dart';
 
@@ -12,6 +13,7 @@ class AppModule extends Module {
 
   @override
   List<Module> get imports => [
+        HomeModule(),
         LoginModule(),
         RegisterUserModule(),
       ];
@@ -22,7 +24,7 @@ class AppModule extends Module {
           '/',
           child: (context, args) => const RouterOutletWidget(),
         ),
-        // ModuleRoute('/home', module: HomeModule()),
+        ModuleRoute('/home', module: HomeModule()),
         ModuleRoute('/login', module: LoginModule()),
         ModuleRoute('/register-user', module: RegisterUserModule())
       ];
