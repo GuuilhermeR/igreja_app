@@ -16,6 +16,7 @@ class RegisterPage extends StatefulWidget {
 TextEditingController txtNomeController = TextEditingController();
 TextEditingController txtUsuarioController = TextEditingController();
 TextEditingController txtSenhaController = TextEditingController();
+TextEditingController txtDtNascController = TextEditingController();
 bool passwordVisibility = false;
 
 FocusNode focusNodeNome = FocusNode();
@@ -45,31 +46,44 @@ class _RegisterPageState extends State<RegisterPage> {
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: <Widget>[
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-              height: 70,
-            ),
-            CampoNome(),
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-              height: 50,
-            ),
-            CampoUsuario(),
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-              height: 50,
-            ),
-            CampoSenha(),
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-              height: 50,
-            ),
-            dtNascimento(),
-          ],
+      body: GestureDetector(
+        onHorizontalDragUpdate: (details) {
+          if (details.delta.direction <= 0) {
+            RouteService routeService = RouteService();
+            routeService.login();
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            children: <Widget>[
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 70,
+              ),
+              CampoNome(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 50,
+              ),
+              CampoUsuario(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 50,
+              ),
+              CampoSenha(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 50,
+              ),
+              dtNascimento(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 50,
+              ),
+              ButtonCadastrar()
+            ],
+          ),
         ),
       ),
     );
@@ -95,7 +109,7 @@ TextFormField CampoUsuario() {
 TextFormField CampoNome() {
   return TextFormField(
     keyboardType: TextInputType.text,
-    controller: txtUsuarioController,
+    controller: txtNomeController,
     onFieldSubmitted: (String teste) =>
         {txtUsuarioController.text.toLowerCase()},
     decoration: const InputDecoration(
@@ -112,13 +126,13 @@ TextFormField CampoSenha() {
     keyboardType: TextInputType.text,
     obscureText: !passwordVisibility,
     controller: txtSenhaController,
-    decoration: InputDecoration(
-      icon: const Icon(Icons.password_rounded),
+    decoration: const InputDecoration(
+      icon: Icon(Icons.password_rounded),
       labelText: 'Senha',
-      contentPadding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-      labelStyle: const TextStyle(
+      contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      labelStyle: TextStyle(
           color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 16),
-      enabledBorder: const UnderlineInputBorder(
+      enabledBorder: UnderlineInputBorder(
         borderSide: BorderSide(
           color: Colors.black38,
           width: 1,
@@ -128,7 +142,7 @@ TextFormField CampoSenha() {
           topRight: Radius.circular(4.0),
         ),
       ),
-      focusedBorder: const UnderlineInputBorder(
+      focusedBorder: UnderlineInputBorder(
         borderSide: BorderSide(
           color: Colors.black38,
           width: 1,
@@ -138,18 +152,18 @@ TextFormField CampoSenha() {
           topRight: Radius.circular(4.0),
         ),
       ),
-      suffixIcon: InkWell(
-        // onTap: () => setState(
-        //   () => passwordVisibility = !passwordVisibility,
-        // ),
-        child: Icon(
-          passwordVisibility
-              ? Icons.visibility_outlined
-              : Icons.visibility_off_outlined,
-          color: const Color(0xFF757575),
-          size: 22,
-        ),
-      ),
+      // suffixIcon: InkWell(
+      //   // onTap: () => setState(
+      //   //   () => passwordVisibility = !passwordVisibility,
+      //   // ),
+      //   child: Icon(
+      //     passwordVisibility
+      //         ? Icons.visibility_outlined
+      //         : Icons.visibility_off_outlined,
+      //     color: const Color(0xFF757575),
+      //     size: 22,
+      //   ),
+      // ),
     ),
   );
 }
@@ -157,7 +171,7 @@ TextFormField CampoSenha() {
 TextFormField dtNascimento() {
   return TextFormField(
     keyboardType: TextInputType.datetime,
-    controller: txtUsuarioController,
+    controller: txtDtNascController,
     onFieldSubmitted: (String teste) =>
         {txtUsuarioController.text.toLowerCase()},
     decoration: const InputDecoration(
@@ -166,5 +180,16 @@ TextFormField dtNascimento() {
         labelText: 'Data Nascimento',
         labelStyle: TextStyle(
             color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 16)),
+  );
+}
+
+ElevatedButton ButtonCadastrar() {
+  return ElevatedButton.icon(
+    onPressed: () {
+      RouteService routeService = RouteService();
+      routeService.registerUser();
+    },
+    icon: const Icon(Icons.logout, size: 25),
+    label: const Text("Cadastrar-se"),
   );
 }

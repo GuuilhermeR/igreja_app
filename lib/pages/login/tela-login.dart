@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                 ? Icons.visibility_outlined
                 : Icons.visibility_off_outlined,
             color: const Color(0xFF757575),
-            size: 22,
+            size: 16,
           ),
         ),
       ),
