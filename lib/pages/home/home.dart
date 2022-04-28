@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('IELB - Jaraguá do Sul'),
+        title: const Text('CELE - Jaraguá do Sul'),
         centerTitle: true,
       ),
       body: Center(

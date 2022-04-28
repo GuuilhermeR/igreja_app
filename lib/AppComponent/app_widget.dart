@@ -14,7 +14,7 @@ class AppWidget extends StatelessWidget {
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        title: 'IELB - Jaraguá do Sul',
+        title: 'CELE - Jaraguá do Sul',
         theme: ThemeData(primarySwatch: Colors.lightBlue),
         color: Colors.lightBlue,
         routeInformationParser: Modular.routeInformationParser,

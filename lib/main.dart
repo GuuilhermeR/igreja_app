@@ -1,5 +1,4 @@
 import 'package:igreja_app/pages/home/home.dart';
-import 'package:igreja_app/pages/login/tela-login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/AppComponent/app_module.dart';
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'IELB - SC',
+      title: 'CELE - Jaraguá do Sul',
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       theme: ThemeData(
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       darkTheme: ThemeData(
-        primaryColor: Color.fromARGB(255, 13, 76, 128),
+        primaryColor: const Color.fromARGB(255, 13, 76, 128),
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
