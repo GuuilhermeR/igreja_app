@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:igreja_app/pages/biblia/biblia-page.dart';
 import 'package:igreja_app/pages/feedpage/feed.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,8 +23,9 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeedPage(),
-    Text('Feed', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-    Text('Bíblia', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+    BibliaPage(),
+    Text('Ao vivo',
+        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
     Text('Configuração',
         style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
   ];
