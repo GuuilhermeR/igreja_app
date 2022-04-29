@@ -1,6 +1,9 @@
-// ignore_for_file: unnecessary_new
+// ignore_for_file: unnecessary_new, avoid_single_cascade_in_expression_statements, prefer_final_fields
 
 import 'package:flutter/material.dart';
+import 'package:igreja_app/models/biblia/biblia.dart';
+import 'package:igreja_app/services/biblia_api_service.dart';
+import 'package:igreja_app/widgets/custom_toast.dart';
 
 class BibliaPage extends StatefulWidget {
   const BibliaPage({Key? key}) : super(key: key);
@@ -10,49 +13,7 @@ class BibliaPage extends StatefulWidget {
 }
 
 class _BibliaPageState extends State<BibliaPage> {
-  String nomeCapitulo = "";
-  final List _capitulosAnt = [
-    "Gênesis",
-    "Êxodo",
-    "Levítico",
-    "Números",
-    "Deuteronômio",
-    "Josué",
-    "Juízes",
-    "Rute",
-    "I Samuel",
-    "II Samuel",
-    "I Reis",
-    "II Reis",
-    "I Crônicas",
-    "II Crônicas",
-    "Esdras",
-    "Neemias",
-    "Ester",
-    "Jó",
-    "Salmos",
-    "Provérbios",
-    "Eclesiastes",
-    "Cânticos dos Cânticos",
-    "Isaías",
-    "Jeremias",
-    "Lamentações",
-    "Ezequiel",
-    "Daniel",
-    "Oseias",
-    "Joel",
-    "Amós",
-    "Obadias",
-    "Jonas",
-    "Miqueias",
-    "Naum",
-    "Habacuque",
-    "Sofonias",
-    "Ageu",
-    "Zacarias",
-    "Malaquias"
-  ];
-
+  late List<Biblia> _chaptersName = getChapters();
   late List<DropdownMenuItem<String>> _dropDownMenuItems;
 
   @override
@@ -66,8 +27,9 @@ class _BibliaPageState extends State<BibliaPage> {
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = [];
-    for (String cap in _capitulosAnt) {
-      items.add(new DropdownMenuItem(value: cap, child: new Text(cap)));
+    for (Biblia cap in _chaptersName) {
+      items.add(new DropdownMenuItem(
+          value: cap.author, child: new Text(cap.author.toString())));
     }
     return items;
   }
@@ -103,6 +65,18 @@ class _BibliaPageState extends State<BibliaPage> {
         ],
       ),
     );
+  }
+
+  List<Biblia> getChapters() {
+    BibliaService bibliaService = BibliaService();
+    bibliaService.GetAllBookChap().then((value) {
+      if (value != null) {
+        return value;
+      }
+    }).catchError((error) {
+      CustomToast.showError(error.toString());
+    });
+    return List.empty();
   }
 
   void changedDropDownItem(selectedCap) {

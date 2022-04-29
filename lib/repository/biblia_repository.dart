@@ -1,27 +1,31 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 
-import 'package:igreja_app/Models/User/user.dart';
-import 'package:igreja_app/Repository/base_repository.dart';
-import 'package:igreja_app/Services/jwt_service.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:igreja_app/models/biblia/biblia.dart';
 
 import '../Models/CustomException/custom_exception.dart';
 import '../Services/http_service.dart';
 
 class BibliaRepository {
-  static const String _route = "/login";
+  String URL_BIBLIA_API = "https://api.scripture.api.bible/v1";
+  static const String _route = "/bibles";
 
-  Future<User?> get(User user) async {
-    String methodRoute = '${"https://www.abibliadigital.com.br/api"}$_route';
-    final response = await HttpService().post(
-      methodRoute,
-      user,
-    );
+  Future<Biblia> getAllBookChap() async {
+    String methodRoute = '$URL_BIBLIA_API$_route';
+
+    final response = await HttpService().get(methodRoute);
+
+    debugPrint(methodRoute.toString());
+    debugPrint('teste');
+
     if (response.statusCode == 200) {
-      JwtService jwtService = JwtService();
-      jwtService.removeToken();
-      jwtService.setToken(response.body.toString());
-      return user;
+      Biblia biblia = Biblia();
+      biblia.fromJson(jsonDecode(response.body));
+      return biblia;
     }
+
     CustomException customException =
         CustomException.fromJson(jsonDecode(response.body));
     throw customException.detail;

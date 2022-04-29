@@ -1,18 +1,13 @@
-import 'dart:convert';
+// ignore_for_file: non_constant_identifier_names
 
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:igreja_app/models/biblia/biblia.dart';
+import 'package:igreja_app/repository/biblia_repository.dart';
 
 class BibliaService {
-  final dio = Dio();
+  Future<Biblia?> GetAllBookChap() {
+    BibliaRepository bibliaRepository = BibliaRepository();
+    return bibliaRepository.getAllBookChap();
+  }
 
-  String URL_BIBLIA_API = "https://www.abibliadigital.com.br/api/";
-
-  // Future<List<Biblia>> BuscarLivros(String livro) async {
-  //   final response = await dio.get(URL_BIBLIA_API + livro);
-  //   final List<dynamic> responseMap = jsonDecode(response.data);
-  //   return responseMap.map<Biblia>((resp) => Biblia.fromMap(resp)).toList();
-  // }
+  then(Null Function(dynamic value) param0) {}
 }
