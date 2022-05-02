@@ -4,29 +4,29 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class Biblia {
-  String? author;
-  int? chapters;
-  String? group;
+  String? id;
+  String? bibleId;
+  String? abbreviation;
   String? name;
-  String? testament;
+  String? nameLong;
 
-  Biblia({this.author, this.chapters, this.group, this.name, this.testament});
+  Biblia({this.id, this.bibleId, this.abbreviation, this.name, this.nameLong});
 
-  fromJson(Map<String, dynamic> json) {
-    author = json['author'];
-    chapters = json['chapters'];
-    group = json['group'];
+  Biblia.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    bibleId = json['bibleId'];
+    abbreviation = json['abbreviation'];
     name = json['name'];
-    testament = json['testament'];
+    nameLong = json['nameLong'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['author'] = this.author;
-    data['chapters'] = this.chapters;
-    data['group'] = this.group;
+    data['id'] = this.id;
+    data['bibleId'] = this.bibleId;
+    data['abbreviation'] = this.abbreviation;
     data['name'] = this.name;
-    data['testament'] = this.testament;
+    data['nameLong'] = this.nameLong;
     return data;
   }
 }

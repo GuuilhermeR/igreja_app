@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_new, avoid_single_cascade_in_expression_statements, prefer_final_fields
+// ignore_for_file: unnecessary_new, avoid_single_cascade_in_expression_statements, prefer_final_fields, file_names
 
 import 'package:flutter/material.dart';
 import 'package:igreja_app/models/biblia/biblia.dart';
@@ -28,8 +28,9 @@ class _BibliaPageState extends State<BibliaPage> {
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = [];
     for (Biblia cap in _chaptersName) {
+      debugPrint('Author: ' + cap.name.toString());
       items.add(new DropdownMenuItem(
-          value: cap.author, child: new Text(cap.author.toString())));
+          value: cap.name, child: new Text(cap.name.toString())));
     }
     return items;
   }
@@ -71,6 +72,7 @@ class _BibliaPageState extends State<BibliaPage> {
     BibliaService bibliaService = BibliaService();
     bibliaService.GetAllBookChap().then((value) {
       if (value != null) {
+        debugPrint(value.toString());
         return value;
       }
     }).catchError((error) {

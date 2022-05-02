@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:igreja_app/models/biblia/biblia.dart';
 
 import '../Models/CustomException/custom_exception.dart';
@@ -10,19 +9,15 @@ import '../Services/http_service.dart';
 
 class BibliaRepository {
   String URL_BIBLIA_API = "https://api.scripture.api.bible/v1";
-  static const String _route = "/bibles";
+  static const String _route = "/bibles/d63894c8d9a7a503-01/books";
 
   Future<Biblia> getAllBookChap() async {
     String methodRoute = '$URL_BIBLIA_API$_route';
 
     final response = await HttpService().get(methodRoute);
 
-    debugPrint(methodRoute.toString());
-    debugPrint('teste');
-
     if (response.statusCode == 200) {
-      Biblia biblia = Biblia();
-      biblia.fromJson(jsonDecode(response.body));
+      Biblia biblia = Biblia.fromJson(jsonDecode(response.body));
       return biblia;
     }
 

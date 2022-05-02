@@ -24,7 +24,7 @@ class HttpService {
   Future<dynamic> get(String url) async {
     Map<String, String> cabecalhos = {
       'Content-Type': 'application/json; charset=UTF-8',
-      'api-key': '74492279dd6ad908d86d6c2173887f03',
+      'api-key': 'd67e529b0009575014410a5b60bbba68',
     };
     JwtService jwtService = JwtService();
     String? jwtToken = await jwtService.getToken();

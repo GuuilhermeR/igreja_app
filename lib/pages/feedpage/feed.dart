@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:igreja_app/widgets/custom_toast.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({Key? key}) : super(key: key);

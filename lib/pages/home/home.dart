@@ -11,8 +11,6 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-int _selectedIndex = 0;
-
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, non_constant_identifier_names
+// ignore_for_file: prefer_const_literals_to_create_immutables, non_constant_identifier_names, file_names
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,7 +40,7 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         title: const Text('Cadastro'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             RouteService routeService = RouteService();
             routeService.login();
