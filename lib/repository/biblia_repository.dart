@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:igreja_app/models/biblia/biblia.dart';
 
 import '../Models/CustomException/custom_exception.dart';
@@ -16,10 +17,11 @@ class BibliaRepository {
 
     final response = await HttpService().get(methodRoute);
 
-    // if (response.statusCode == 200) {
-    //   Biblia biblia = Biblia.fromJson(jsonDecode(response.body));
-    //   return biblia;
-    // }
+    if (response.statusCode == 200) {
+      debugPrint(methodRoute);
+      debugPrint(response.body.toString());
+      return Biblia.fromJson(jsonDecode(response.body));
+    }
 
     CustomException customException =
         CustomException.fromJson(jsonDecode(response.body));

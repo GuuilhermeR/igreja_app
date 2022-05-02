@@ -30,7 +30,7 @@ class _BibliaPageState extends State<BibliaPage> {
     for (Biblia cap in _chaptersName) {
       debugPrint('Author: ' + cap.name.toString());
       items.add(new DropdownMenuItem(
-          value: cap.name, child: new Text(cap.name.toString())));
+          value: cap.name.toString(), child: new Text(cap.name.toString())));
     }
     return items;
   }
@@ -71,12 +71,12 @@ class _BibliaPageState extends State<BibliaPage> {
   List<Biblia> getChapters() {
     BibliaService bibliaService = BibliaService();
     bibliaService.GetAllBookChap().then((value) {
-      if (value != null) {
-        debugPrint(value.toString());
+      if (value.toString() != null) {
+        debugPrint('Value: ' + value.toString());
         return value;
       }
     }).catchError((error) {
-      CustomToast.showError(error.toString());
+      CustomToast.showError('Erro: ' + error.toString());
     });
     return List.empty();
   }
