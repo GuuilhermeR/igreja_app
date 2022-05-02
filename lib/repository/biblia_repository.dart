@@ -16,10 +16,10 @@ class BibliaRepository {
 
     final response = await HttpService().get(methodRoute);
 
-    if (response.statusCode == 200) {
-      Biblia biblia = Biblia.fromJson(jsonDecode(response.body));
-      return biblia;
-    }
+    // if (response.statusCode == 200) {
+    //   Biblia biblia = Biblia.fromJson(jsonDecode(response.body));
+    //   return biblia;
+    // }
 
     CustomException customException =
         CustomException.fromJson(jsonDecode(response.body));
