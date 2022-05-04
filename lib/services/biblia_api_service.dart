@@ -8,6 +8,4 @@ class BibliaService {
     BibliaRepository bibliaRepository = BibliaRepository();
     return bibliaRepository.getAllBookChap();
   }
-
-  then(Null Function(dynamic value) param0) {}
 }
