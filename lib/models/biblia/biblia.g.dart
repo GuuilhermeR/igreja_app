@@ -7,11 +7,17 @@ part of 'biblia.dart';
 // **************************************************************************
 
 Biblia _$BibliaFromJson(Map<String, dynamic> json) => Biblia(
-      data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      json['id'] as String,
+      bibleId: json['bibleId'] as String?,
+      abbreviation: json['abbreviation'] as String?,
+      name: json['name'] as String?,
+      nameLong: json['nameLong'] as String?,
     );
 
 Map<String, dynamic> _$BibliaToJson(Biblia instance) => <String, dynamic>{
-      'data': instance.data,
+      'id': instance.id,
+      'bibleId': instance.bibleId,
+      'abbreviation': instance.abbreviation,
+      'name': instance.name,
+      'nameLong': instance.nameLong,
     };

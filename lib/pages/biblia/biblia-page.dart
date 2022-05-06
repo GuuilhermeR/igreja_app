@@ -14,23 +14,24 @@ class BibliaPage extends StatefulWidget {
 
 class _BibliaPageState extends State<BibliaPage> {
   late List<Biblia> _chaptersName = getChapters();
-  late List<DropdownMenuItem<String>> _dropDownMenuItems;
 
   @override
   void initState() {
-    _dropDownMenuItems = getDropDownMenuItems();
-    _currentCap = _dropDownMenuItems[0].value!;
+    _chaptersName = getChapters();
+    _currentCap = '';
     super.initState();
   }
+
+  late List<DropdownMenuItem<String>> _dropDownMenuItems =
+      getDropDownMenuItems();
 
   late String _currentCap;
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = [];
     for (Biblia cap in _chaptersName) {
-      debugPrint(cap.toString());
-      // items.add(new DropdownMenuItem(
-      //     value: cap.name.toString(), child: new Text(cap.name.toString())));
+      items.add(new DropdownMenuItem(
+          value: cap.name.toString(), child: new Text(cap.name.toString())));
     }
     return items;
   }
@@ -71,9 +72,7 @@ class _BibliaPageState extends State<BibliaPage> {
   List<Biblia> getChapters() {
     BibliaService bibliaService = BibliaService();
     bibliaService.GetAllBookChap().then((value) {
-      if (value != null) {
-        return value.data?.toList();
-      }
+      return value;
     }).catchError((error) {
       CustomToast.showError('Erro: ' + error.toString());
     });

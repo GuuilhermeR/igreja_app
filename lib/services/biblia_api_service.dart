@@ -4,7 +4,7 @@ import 'package:igreja_app/models/biblia/biblia.dart';
 import 'package:igreja_app/repository/biblia_repository.dart';
 
 class BibliaService {
-  Future<Biblia?> GetAllBookChap() {
+  Future<List<Biblia>> GetAllBookChap() {
     BibliaRepository bibliaRepository = BibliaRepository();
     return bibliaRepository.getAllBookChap();
   }
