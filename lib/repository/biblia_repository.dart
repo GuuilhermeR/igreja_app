@@ -1,21 +1,21 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, constant_identifier_names
 
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:igreja_app/models/biblia/biblia.dart';
 
 import '../Models/CustomException/custom_exception.dart';
 import '../Services/http_service.dart';
 
+import 'package:http/http.dart' as http;
+
 class BibliaRepository {
-  String URL_BIBLIA_API = "https://api.scripture.api.bible/v1";
+  static const String url_biblia_api = "https://api.scripture.api.bible/v1";
   static const String _route = "/bibles/d63894c8d9a7a503-01/books";
+  static const String methodRoute = '$url_biblia_api$_route';
 
   Future<List<Biblia>> getAllBookChap() async {
-    String methodRoute = '$URL_BIBLIA_API$_route';
-
-    final response = await HttpService().get(methodRoute);
+    final response = await HttpService().post(methodRoute, {});
 
     if (response.statusCode == 200) {
       var tagObjsJson = jsonDecode(response.body)['data'] as List;

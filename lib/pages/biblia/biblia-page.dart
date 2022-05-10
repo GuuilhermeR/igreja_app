@@ -1,5 +1,9 @@
 // ignore_for_file: unnecessary_new, avoid_single_cascade_in_expression_statements, prefer_final_fields, file_names
 
+import 'dart:async';
+import 'dart:html';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:igreja_app/models/biblia/biblia.dart';
 import 'package:igreja_app/services/biblia_api_service.dart';
@@ -13,25 +17,47 @@ class BibliaPage extends StatefulWidget {
 }
 
 class _BibliaPageState extends State<BibliaPage> {
-  late List<Biblia> _chaptersName = getChapters();
+  List<Biblia> _dropdownItems = [];
+
+  getChapters() async {
+    setState(() {
+      _dropdownItems.clear();
+      BibliaService bibliaService = BibliaService();
+      bibliaService.GetAllBookChap().then((value) {
+        for (var cap in value) {
+          _dropdownItems.add(new Biblia(
+              cap.id.toString(),
+              cap.bibleId.toString(),
+              cap.abbreviation.toString(),
+              cap.name.toString(),
+              cap.nameLong.toString()));
+        }
+        _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
+        _selectedItem = _dropdownMenuItems[0].value;
+      }).catchError((error) {
+        CustomToast.showError('Erro: ' + error.toString());
+      });
+    });
+  }
+
+  List<DropdownMenuItem<Biblia>> _dropdownMenuItems;
+  Biblia _selectedItem;
 
   @override
   void initState() {
-    _chaptersName = getChapters();
-    _currentCap = '';
     super.initState();
+    getChapters();
   }
 
-  late List<DropdownMenuItem<String>> _dropDownMenuItems =
-      getDropDownMenuItems();
-
-  late String _currentCap;
-
-  List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    List<DropdownMenuItem<String>> items = [];
-    for (Biblia cap in _chaptersName) {
-      items.add(new DropdownMenuItem(
-          value: cap.name.toString(), child: new Text(cap.name.toString())));
+  List<DropdownMenuItem<Biblia>> buildDropDownMenuItems(List listBiblia) {
+    List<DropdownMenuItem<Biblia>> items = [];
+    for (Biblia bibliaItem in listBiblia) {
+      items.add(
+        DropdownMenuItem(
+          child: Text(bibliaItem.name.toString()),
+          value: bibliaItem,
+        ),
+      );
     }
     return items;
   }
@@ -52,13 +78,13 @@ class _BibliaPageState extends State<BibliaPage> {
                   padding: const EdgeInsets.all(16.0),
                 ),
                 new DropdownButton(
-                  value: _currentCap,
-                  items: _dropDownMenuItems,
+                  value: _selectedItem,
+                  items: _dropdownMenuItems,
                   onChanged: changedDropDownItem,
                 ),
                 new DropdownButton(
-                  value: _currentCap,
-                  items: _dropDownMenuItems,
+                  value: _selectedItem,
+                  items: _dropdownMenuItems,
                   onChanged: changedDropDownItem,
                 )
               ],
@@ -69,19 +95,9 @@ class _BibliaPageState extends State<BibliaPage> {
     );
   }
 
-  List<Biblia> getChapters() {
-    BibliaService bibliaService = BibliaService();
-    bibliaService.GetAllBookChap().then((value) {
-      return value;
-    }).catchError((error) {
-      CustomToast.showError('Erro: ' + error.toString());
-    });
-    return List.empty();
-  }
-
   void changedDropDownItem(selectedCap) {
     setState(() {
-      _currentCap = selectedCap;
+      _selectedItem = selectedCap;
     });
   }
 }

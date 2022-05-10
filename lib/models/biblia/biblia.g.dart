@@ -8,10 +8,10 @@ part of 'biblia.dart';
 
 Biblia _$BibliaFromJson(Map<String, dynamic> json) => Biblia(
       json['id'] as String,
-      bibleId: json['bibleId'] as String?,
-      abbreviation: json['abbreviation'] as String?,
-      name: json['name'] as String?,
-      nameLong: json['nameLong'] as String?,
+      json['bibleId'] as String,
+      json['abbreviation'] as String,
+      json['name'] as String,
+      json['nameLong'] as String,
     );
 
 Map<String, dynamic> _$BibliaToJson(Biblia instance) => <String, dynamic>{
