@@ -5,6 +5,7 @@ import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Services/login_service.dart';
 import 'package:igreja_app/Widgets/custom_toast.dart';
 import 'package:igreja_app/services/route_service.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -23,6 +24,10 @@ class _LoginPageState extends State<LoginPage> {
   FocusNode focusNodeSenha = FocusNode();
   FocusNode focusNodeLogin = FocusNode();
 
+  final form = FormGroup({
+    'user': FormControl(),
+  });
+
   @override
   void initState() {
     super.initState();
@@ -33,38 +38,55 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    AbstractControl userControl = form.control('user');
+    userControl.markAsEnabled();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('CELE - Jaraguá do Sul'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: <Widget>[
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-              height: 70,
-            ),
-            CarregarFoto(),
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-              height: 50,
-            ),
-            CampoUsuario(),
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-            ),
-            CampoSenha(),
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-            ),
-            ButtonLogar(),
-            const Divider(
-              color: Color.fromARGB(0, 255, 255, 255),
-            ),
-            ButtonCadastrar()
-          ],
+      body: Card(
+        margin: const EdgeInsets.only(top: 60, left: 15, right: 15, bottom: 60),
+        color: Colors.white54,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView(
+            children: <Widget>[
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 70,
+              ),
+              CarregarFoto(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 50,
+              ),
+              CampoUsuario(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+              ),
+              CampoSenha(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+              ),
+              Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: ButtonLogar(),
+                  ),
+                  const Divider(
+                    color: Color.fromARGB(0, 255, 255, 255),
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: ButtonCadastrar(),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -90,32 +112,41 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  ElevatedButton ButtonLogar() {
-    return ElevatedButton.icon(
-      onPressed: () {
-        logar();
-      },
-      icon: const Icon(Icons.login, size: 25),
-      label: const Text("Login"),
+  SizedBox ButtonLogar() {
+    return SizedBox(
+      height: 40,
+      width: 220,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          logar();
+        },
+        icon: const Icon(Icons.login, size: 25),
+        label: const Text("Login"),
+      ),
     );
   }
 
-  ElevatedButton ButtonCadastrar() {
-    return ElevatedButton.icon(
-      onPressed: () {
-        RouteService routeService = RouteService();
-        routeService.registerUser();
-      },
-      icon: const Icon(Icons.logout, size: 25),
-      label: const Text("Cadastrar-se"),
+  SizedBox ButtonCadastrar() {
+    return SizedBox(
+      height: 40,
+      width: 220,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          RouteService routeService = RouteService();
+          routeService.registerUser();
+        },
+        icon: const Icon(Icons.logout, size: 25),
+        label: const Text("Cadastrar-se"),
+      ),
     );
   }
 
-  TextFormField CampoSenha() {
-    return TextFormField(
+  ReactiveTextField CampoSenha() {
+    return ReactiveTextField(
       keyboardType: TextInputType.text,
       obscureText: !passwordVisibility,
       controller: txtSenhaController,
+      formControlName: 'password',
       // onFieldSubmitted: (String teste) => {logar()},
       decoration: InputDecoration(
         icon: const Icon(Icons.password),
@@ -139,14 +170,11 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  TextFormField CampoUsuario() {
-    return TextFormField(
-      keyboardType: TextInputType.text,
-      controller: txtUsuarioController,
-      onFieldSubmitted: (String teste) => {
-        focusNodeSenha.requestFocus(),
-        txtUsuarioController.text.toLowerCase()
-      },
+  ReactiveTextField CampoUsuario() {
+    return ReactiveTextField(
+      formControlName: 'user',
+      textInputAction: TextInputAction.next,
+      onSubmitted: () => form.focus('password'),
       onEditingComplete: () => {txtUsuarioController.text.toLowerCase()},
       decoration: const InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),

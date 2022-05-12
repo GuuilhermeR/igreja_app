@@ -7,8 +7,6 @@ import 'package:igreja_app/models/biblia/biblia.dart';
 import '../Models/CustomException/custom_exception.dart';
 import '../Services/http_service.dart';
 
-import 'package:http/http.dart' as http;
-
 class BibliaRepository {
   static const String url_biblia_api = "https://api.scripture.api.bible/v1";
   static const String _route = "/bibles/d63894c8d9a7a503-01/books";

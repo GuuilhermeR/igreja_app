@@ -1,13 +1,10 @@
 // ignore_for_file: unnecessary_new, avoid_single_cascade_in_expression_statements, prefer_final_fields, file_names
 
-import 'dart:async';
-import 'dart:html';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:igreja_app/models/biblia/biblia.dart';
 import 'package:igreja_app/services/biblia_api_service.dart';
 import 'package:igreja_app/widgets/custom_toast.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 class BibliaPage extends StatefulWidget {
   const BibliaPage({Key? key}) : super(key: key);
@@ -18,7 +15,6 @@ class BibliaPage extends StatefulWidget {
 
 class _BibliaPageState extends State<BibliaPage> {
   List<Biblia> _dropdownItems = [];
-
   getChapters() async {
     setState(() {
       _dropdownItems.clear();
@@ -33,15 +29,24 @@ class _BibliaPageState extends State<BibliaPage> {
               cap.nameLong.toString()));
         }
         _dropdownMenuItems = buildDropDownMenuItems(_dropdownItems);
-        _selectedItem = _dropdownMenuItems[0].value;
+        _selectedItem = _dropdownMenuItems[0].value!;
       }).catchError((error) {
         CustomToast.showError('Erro: ' + error.toString());
       });
     });
   }
 
-  List<DropdownMenuItem<Biblia>> _dropdownMenuItems;
-  Biblia _selectedItem;
+  final form = FormGroup({
+    'usuario': FormControl<String>(validators: [Validators.required]),
+    'senha': FormControl<String>(validators: [
+      Validators.required,
+    ]),
+  });
+
+  String get name => form.control('name').value;
+
+  late List<DropdownMenuItem<Biblia>> _dropdownMenuItems;
+  late Biblia _selectedItem;
 
   @override
   void initState() {

@@ -48,6 +48,7 @@ dependencies:
   rxdart: ^0.27.3
   build_runner: ^2.1.10
   json_serializable: ^6.2.0
+  reactive_forms: ^12.0.0
 
 flutter_icons:
   android: "launcher_icon"
