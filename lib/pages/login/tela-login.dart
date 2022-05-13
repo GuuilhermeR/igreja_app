@@ -5,6 +5,7 @@ import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Services/login_service.dart';
 import 'package:igreja_app/Widgets/custom_toast.dart';
 import 'package:igreja_app/services/route_service.dart';
+import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginPage extends StatefulWidget {
@@ -25,7 +26,8 @@ class _LoginPageState extends State<LoginPage> {
   FocusNode focusNodeLogin = FocusNode();
 
   final form = FormGroup({
-    'user': FormControl(),
+    'userId': FormControl<String>(validators: [Validators.required]),
+    'password': FormControl<String>(validators: [Validators.required]),
   });
 
   @override
@@ -38,9 +40,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    AbstractControl userControl = form.control('user');
-    userControl.markAsEnabled();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('CELE - Jaraguá do Sul'),
@@ -62,11 +61,14 @@ class _LoginPageState extends State<LoginPage> {
                 color: Color.fromARGB(0, 255, 255, 255),
                 height: 50,
               ),
-              CampoUsuario(),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-              ),
-              CampoSenha(),
+              ReactiveForm(
+                  child: Column(
+                    children: [
+                      CampoUsuario(),
+                      CampoSenha(),
+                    ],
+                  ),
+                  formGroup: form),
               const Divider(
                 color: Color.fromARGB(0, 255, 255, 255),
               ),
@@ -93,13 +95,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void logar() {
-    User user =
-        User(txtUsuarioController.value.text, txtSenhaController.value.text);
-    if (user.userId.isEmpty) {
-      CustomToast.showError("Informe o usuário!");
-    } else if (user.password.isEmpty) {
-      CustomToast.showError("Informe a senha!");
-    } else {
+    form.markAsTouched();
+
+    if (form.valid) {
+      User user = User.fromJson(form.value);
       LoginService _loginService = LoginService();
       _loginService.login(user).then((value) {
         if (value != null) {
@@ -110,6 +109,13 @@ class _LoginPageState extends State<LoginPage> {
         CustomToast.showError(error.toString());
       });
     }
+    // if (user.userId.isEmpty) {
+    //   CustomToast.showError("Informe o usuário!");
+    // } else if (user.password.isEmpty) {
+    //   CustomToast.showError("Informe a senha!");
+    // } else {
+
+    // }
   }
 
   SizedBox ButtonLogar() {
@@ -172,10 +178,9 @@ class _LoginPageState extends State<LoginPage> {
 
   ReactiveTextField CampoUsuario() {
     return ReactiveTextField(
-      formControlName: 'user',
+      formControlName: 'userId',
       textInputAction: TextInputAction.next,
       onSubmitted: () => form.focus('password'),
-      onEditingComplete: () => {txtUsuarioController.text.toLowerCase()},
       decoration: const InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
           icon: Icon(Icons.person),
@@ -189,11 +194,12 @@ class _LoginPageState extends State<LoginPage> {
 
   SizedBox CarregarFoto() {
     return SizedBox(
-        child: Image.network(
-      'https://www.ielb.org.br/public/download/281/simbolo-rgb.png.png',
-      width: 128,
-      height: 150,
-      fit: BoxFit.scaleDown,
-    ));
+        //     child: Image.network(
+        //   'https://www.ielb.org.br/public/download/281/simbolo-rgb.png.png',
+        //   width: 128,
+        //   height: 150,
+        //   fit: BoxFit.scaleDown,
+        // ));
+        child: Lottie.asset("98432-loading.json", width: 128, height: 150));
   }
 }
