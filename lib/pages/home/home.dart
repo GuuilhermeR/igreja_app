@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:igreja_app/pages/biblia/biblia-page.dart';
+import 'package:igreja_app/pages/configuration/configuration.dart';
 import 'package:igreja_app/pages/feedpage/feed.dart';
+import 'package:igreja_app/pages/live/live.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,11 +23,9 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeedPage(),
-    BibliaPage(),
-    Text('Ao vivo',
-        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
-    Text('Configuração',
-        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+    // BibliaPage(),
+    LivePage(),
+    ConfigurationPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -52,10 +52,10 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.home),
                 label: ('Início'),
                 backgroundColor: Colors.blue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.bookmark),
-                label: ('Bíblia'),
-                backgroundColor: Colors.blue),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.bookmark),
+            //     label: ('Bíblia'),
+            //     backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.live_tv),
                 label: ('Ao vivo'),

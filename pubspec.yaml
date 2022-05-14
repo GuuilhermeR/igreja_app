@@ -50,6 +50,8 @@ dependencies:
   json_serializable: ^6.2.0
   reactive_forms: ^12.0.0
   lottie: ^1.3.0
+  video_player: ^2.4.2
+  youtube_player_flutter: ^8.0.0
 
 flutter_icons:
   android: "simbolo-rgb.png"

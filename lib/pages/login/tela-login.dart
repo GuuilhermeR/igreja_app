@@ -79,21 +79,6 @@ class _LoginPageState extends State<LoginPage> {
                 color: Color.fromARGB(0, 255, 255, 255),
               ),
               ButtonCadastrar()
-              //   Stack(
-              //     children: [
-              //       Align(
-              //         alignment: Alignment.centerLeft,
-              //         child: ButtonLogar(),
-              //       ),
-              //       const Divider(
-              //         color: Color.fromARGB(0, 255, 255, 255),
-              //       ),
-              //       Align(
-              //         alignment: Alignment.centerRight,
-              //         child: ButtonCadastrar(),
-              //       ),
-              //     ],
-              //   ),
             ],
           ),
         ),
