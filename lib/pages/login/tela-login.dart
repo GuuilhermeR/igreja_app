@@ -16,10 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController txtUsuarioController = TextEditingController();
-
-  TextEditingController txtSenhaController = TextEditingController();
-
   bool passwordVisibility = false;
 
   FocusNode focusNodeSenha = FocusNode();
@@ -33,28 +29,26 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    txtUsuarioController = TextEditingController();
-    txtSenhaController = TextEditingController();
     passwordVisibility = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('CELE - Jaraguá do Sul'),
-        centerTitle: true,
-      ),
+      backgroundColor: Colors.blue,
       body: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         margin: const EdgeInsets.only(top: 60, left: 15, right: 15, bottom: 60),
-        color: Colors.white54,
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: ListView(
             children: <Widget>[
               const Divider(
                 color: Color.fromARGB(0, 255, 255, 255),
-                height: 70,
+                height: 50,
               ),
               CarregarFoto(),
               const Divider(
@@ -65,6 +59,10 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       CampoUsuario(),
+                      const Divider(
+                        color: Color.fromARGB(0, 255, 255, 255),
+                        height: 30,
+                      ),
                       CampoSenha(),
                     ],
                   ),
@@ -72,21 +70,30 @@ class _LoginPageState extends State<LoginPage> {
               const Divider(
                 color: Color.fromARGB(0, 255, 255, 255),
               ),
-              Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: ButtonLogar(),
-                  ),
-                  const Divider(
-                    color: Color.fromARGB(0, 255, 255, 255),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: ButtonCadastrar(),
-                  ),
-                ],
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+                height: 40,
               ),
+              ButtonLogar(),
+              const Divider(
+                color: Color.fromARGB(0, 255, 255, 255),
+              ),
+              ButtonCadastrar()
+              //   Stack(
+              //     children: [
+              //       Align(
+              //         alignment: Alignment.centerLeft,
+              //         child: ButtonLogar(),
+              //       ),
+              //       const Divider(
+              //         color: Color.fromARGB(0, 255, 255, 255),
+              //       ),
+              //       Align(
+              //         alignment: Alignment.centerRight,
+              //         child: ButtonCadastrar(),
+              //       ),
+              //     ],
+              //   ),
             ],
           ),
         ),
@@ -96,26 +103,31 @@ class _LoginPageState extends State<LoginPage> {
 
   void logar() {
     form.markAsTouched();
-
     if (form.valid) {
+      Future.delayed(Duration.zero, () => showAlert(context));
       User user = User.fromJson(form.value);
       LoginService _loginService = LoginService();
       _loginService.login(user).then((value) {
         if (value != null) {
+          Navigator.of(context).pop();
           RouteService routeService = RouteService();
           routeService.home();
         }
       }).catchError((error) {
+        Navigator.of(context).pop();
         CustomToast.showError(error.toString());
+        return;
       });
+      Navigator.of(context).pop();
     }
-    // if (user.userId.isEmpty) {
-    //   CustomToast.showError("Informe o usuário!");
-    // } else if (user.password.isEmpty) {
-    //   CustomToast.showError("Informe a senha!");
-    // } else {
+  }
 
-    // }
+  void showAlert(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Lottie.asset("79582-gec-church.json"),
+            ));
   }
 
   SizedBox ButtonLogar() {
@@ -124,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
       width: 220,
       child: ElevatedButton.icon(
         onPressed: () {
-          logar();
+          form.valid ? logar() : null;
         },
         icon: const Icon(Icons.login, size: 25),
         label: const Text("Login"),
@@ -151,7 +163,6 @@ class _LoginPageState extends State<LoginPage> {
     return ReactiveTextField(
       keyboardType: TextInputType.text,
       obscureText: !passwordVisibility,
-      controller: txtSenhaController,
       formControlName: 'password',
       // onFieldSubmitted: (String teste) => {logar()},
       decoration: InputDecoration(
@@ -194,12 +205,12 @@ class _LoginPageState extends State<LoginPage> {
 
   SizedBox CarregarFoto() {
     return SizedBox(
-        //     child: Image.network(
-        //   'https://www.ielb.org.br/public/download/281/simbolo-rgb.png.png',
-        //   width: 128,
-        //   height: 150,
-        //   fit: BoxFit.scaleDown,
-        // ));
-        child: Lottie.asset("98432-loading.json", width: 128, height: 150));
+        child: Image.asset(
+      "assets/logo-header.png",
+      width: 80,
+      height: 150,
+      fit: BoxFit.scaleDown,
+    ));
+    // child: Lottie.asset("98432-loading.json", width: 128, height: 150));
   }
 }

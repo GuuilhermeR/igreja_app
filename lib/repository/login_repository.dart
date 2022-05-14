@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:igreja_app/Models/User/user.dart';
 import 'package:igreja_app/Repository/base_repository.dart';
 import 'package:igreja_app/Services/jwt_service.dart';
@@ -16,6 +17,8 @@ class LoginRepository {
       methodRoute,
       user,
     );
+
+    debugPrint(response);
     if (response.statusCode == 200) {
       JwtService jwtService = JwtService();
       jwtService.removeToken();
