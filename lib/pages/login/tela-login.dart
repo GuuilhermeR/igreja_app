@@ -89,21 +89,21 @@ class _LoginPageState extends State<LoginPage> {
   void logar() {
     form.markAsTouched();
     if (form.valid) {
-      Future.delayed(Duration.zero, () => showAlert(context));
+      // Future.delayed(Duration.zero, () => showAlert(context));
       User user = User.fromJson(form.value);
       LoginService _loginService = LoginService();
       _loginService.login(user).then((value) {
         if (value != null) {
-          Navigator.of(context).pop();
+          // Navigator.of(context).pop();
           RouteService routeService = RouteService();
           routeService.home();
         }
       }).catchError((error) {
-        Navigator.of(context).pop();
+        // Navigator.of(context).pop();
         CustomToast.showError(error.toString());
         return;
       });
-      Navigator.of(context).pop();
+      // Navigator.of(context).pop();
     }
   }
 
@@ -149,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
       keyboardType: TextInputType.text,
       obscureText: !passwordVisibility,
       formControlName: 'password',
-      // onFieldSubmitted: (String teste) => {logar()},
+      validationMessages: (control) => {'required': 'Campo Obrigatório.'},
       decoration: InputDecoration(
         icon: const Icon(Icons.password),
         labelText: 'Senha',
@@ -175,6 +175,7 @@ class _LoginPageState extends State<LoginPage> {
   ReactiveTextField CampoUsuario() {
     return ReactiveTextField(
       formControlName: 'userId',
+      validationMessages: (control) => {'required': 'Campo Obrigatório.'},
       textInputAction: TextInputAction.next,
       onSubmitted: () => form.focus('password'),
       decoration: const InputDecoration(
@@ -191,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
   SizedBox CarregarFoto() {
     return SizedBox(
         child: Image.asset(
-      "assets/logo-header.png",
+      "logo-header.png",
       width: 80,
       height: 150,
       fit: BoxFit.scaleDown,

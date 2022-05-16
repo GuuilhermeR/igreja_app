@@ -17,8 +17,7 @@ class LoginRepository {
       methodRoute,
       user,
     );
-
-    debugPrint(response);
+    debugPrint(response.statusCode.toString());
     if (response.statusCode == 200) {
       JwtService jwtService = JwtService();
       jwtService.removeToken();

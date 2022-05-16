@@ -5,7 +5,7 @@ import 'package:igreja_app/AppComponent/app_module.dart';
 import 'package:igreja_app/AppComponent/app_widget.dart';
 
 Future<void> main() async {
-  Modular.setInitialRoute('/home/');
+  Modular.setInitialRoute('/login/');
   runApp(ModularApp(
     module: AppModule(),
     child: const AppWidget(),
