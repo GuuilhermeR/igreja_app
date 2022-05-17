@@ -32,24 +32,22 @@ class _LivePageState extends State<LivePage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(_controller.metadata.toString());
     return Scaffold(
-      body: YoutubePlayerBuilder(
-          player: YoutubePlayer(
-            controller: _controller,
-          ),
-          builder: (context, player) {
-            return Column(
-              children: [
-                player,
-                const Card(
-                  margin:
-                      EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 60),
-                  color: Colors.white,
-                  child: Text('Ao Vivo - Culto Jaraguá do Sul'),
-                ),
-              ],
-            );
-          }),
-    );
+        body: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            child: ListView.builder(
+                itemCount: 1,
+                itemBuilder: (context, index) => Container(
+                      margin: const EdgeInsets.all(8),
+                      child: YoutubePlayer(
+                        controller: _controller,
+                        showVideoProgressIndicator: true,
+                        progressIndicatorColor: Colors.blue,
+                        progressColors: const ProgressBarColors(
+                            playedColor: Colors.blue,
+                            handleColor: Colors.blueAccent),
+                      ),
+                    ))));
   }
 }

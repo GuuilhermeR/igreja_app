@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: ('Início'),
-                backgroundColor: Colors.blue),
+                backgroundColor: Colors.lightBlue),
             // BottomNavigationBarItem(
             //     icon: Icon(Icons.bookmark),
             //     label: ('Bíblia'),
@@ -59,11 +59,11 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.live_tv),
                 label: ('Ao vivo'),
-                backgroundColor: Colors.blue),
+                backgroundColor: Colors.lightBlue),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               label: ('Configuração'),
-              backgroundColor: Colors.blue,
+              backgroundColor: Colors.lightBlue,
             ),
           ],
           type: BottomNavigationBarType.shifting,
