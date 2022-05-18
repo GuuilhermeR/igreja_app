@@ -42,6 +42,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('CELE - Jaraguá do Sul'),
         centerTitle: true,
+        toolbarHeight: 30,
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

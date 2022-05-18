@@ -18,19 +18,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'CELE - Jaraguá do Sul',
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       theme: ThemeData(
-        primaryColor: Colors.blue,
+        primaryColor: Color.fromARGB(255, 98, 178, 243),
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      darkTheme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 13, 76, 128),
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      // darkTheme: ThemeData(
+      //   primaryColor: const Color.fromARGB(255, 13, 76, 128),
+      //   primarySwatch: Colors.blue,
+      //   visualDensity: VisualDensity.adaptivePlatformDensity,
+      // ),
     );
   }
 }
