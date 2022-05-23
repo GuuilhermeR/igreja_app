@@ -89,21 +89,21 @@ class _LoginPageState extends State<LoginPage> {
   void logar() {
     form.markAsTouched();
     if (form.valid) {
-      // Future.delayed(Duration.zero, () => showAlert(context));
+      Future.delayed(Duration.zero, () => showAlert(context));
       User user = User.fromJson(form.value);
       LoginService _loginService = LoginService();
       _loginService.login(user).then((value) {
         if (value != null) {
-          // Navigator.of(context).pop();
+          Navigator.of(context).pop();
           RouteService routeService = RouteService();
           routeService.home();
         }
       }).catchError((error) {
-        // Navigator.of(context).pop();
+        Navigator.of(context).pop();
         CustomToast.showError(error.toString());
         return;
       });
-      // Navigator.of(context).pop();
+      Navigator.of(context).pop();
     }
   }
 

@@ -17,13 +17,11 @@ class _ConfigurationPageState extends State<ConfigurationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+        padding: const EdgeInsets.fromLTRB(10, 220, 10, 20),
         child: ListView(children: <Widget>[
           botaoConfig(const Text("Perfil"), const Icon(Icons.person, size: 25)),
-          botaoConfig(const Text("Configurar Live"),
-              const Icon(Icons.settings_applications, size: 25)),
-          botaoConfig(const Text("Alterar Senha"),
-              const Icon(Icons.password, size: 25)),
+          botaoConfig(
+              const Text("Ao Vivo"), const Icon(Icons.live_tv, size: 25)),
         ]),
       ),
     );

@@ -20,4 +20,8 @@ class RouteService {
   void home() {
     Modular.to.navigate('/home/');
   }
+
+  void feedAdd() {
+    Modular.to.navigate('/feed-add/');
+  }
 }
