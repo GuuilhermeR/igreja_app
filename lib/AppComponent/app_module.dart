@@ -1,6 +1,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/AppComponent/router_outlet_controller.dart';
 import 'package:igreja_app/AppComponent/router_outlet_widget.dart';
+import 'package:igreja_app/pages/feedpage/feed-add-module.dart';
 import 'package:igreja_app/pages/home/home-module.dart';
 import 'package:igreja_app/pages/login/tela-login-module.dart';
 import 'package:igreja_app/pages/register/register-user-module.dart';
@@ -16,6 +17,7 @@ class AppModule extends Module {
         HomeModule(),
         LoginModule(),
         RegisterUserModule(),
+        FeedAddModule(),
       ];
 
   @override
@@ -26,6 +28,7 @@ class AppModule extends Module {
         ),
         ModuleRoute('/home', module: HomeModule()),
         ModuleRoute('/login', module: LoginModule()),
-        ModuleRoute('/register-user', module: RegisterUserModule())
+        ModuleRoute('/register-user', module: RegisterUserModule()),
+        ModuleRoute('/feed-add', module: FeedAddModule())
       ];
 }
