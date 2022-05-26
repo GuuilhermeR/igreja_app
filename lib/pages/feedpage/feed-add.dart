@@ -56,9 +56,11 @@ class _FeedAddPageState extends State<FeedAdd> {
                   setState(() {});
                 },
               ),
-              ZefyrToolbar.basic(controller: _controller),
+              ZefyrToolbar.basic(
+                  controller: _controller, hideCodeBlock: true, hideLink: true),
               Expanded(
                 child: ZefyrEditor(
+                  maxHeight: 500,
                   minHeight: 100,
                   padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
                   controller: _controller,
