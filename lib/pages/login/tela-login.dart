@@ -36,50 +36,55 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
-      body: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        margin: const EdgeInsets.only(top: 60, left: 15, right: 15, bottom: 60),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListView(
-            children: <Widget>[
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 50,
-              ),
-              CarregarFoto(),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 50,
-              ),
-              ReactiveForm(
-                  child: Column(
-                    children: [
-                      CampoUsuario(),
-                      const Divider(
-                        color: Color.fromARGB(0, 255, 255, 255),
-                        height: 30,
-                      ),
-                      CampoSenha(),
-                    ],
-                  ),
-                  formGroup: form),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-              ),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 40,
-              ),
-              ButtonLogar(),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-              ),
-              ButtonCadastrar()
-            ],
+      body: Center(
+        child: Container(
+          width: 500,
+          height: 800,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: Colors.white,
+          ),
+          margin:
+              const EdgeInsets.only(top: 60, left: 15, right: 15, bottom: 60),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView(
+              children: <Widget>[
+                const Divider(
+                  color: Color.fromARGB(0, 255, 255, 255),
+                  height: 40,
+                ),
+                CarregarFoto(),
+                const Divider(
+                  color: Color.fromARGB(0, 255, 255, 255),
+                  height: 40,
+                ),
+                ReactiveForm(
+                    child: Column(
+                      children: [
+                        CampoUsuario(),
+                        const Divider(
+                          color: Color.fromARGB(0, 255, 255, 255),
+                          height: 20,
+                        ),
+                        CampoSenha(),
+                      ],
+                    ),
+                    formGroup: form),
+                const Divider(
+                  color: Color.fromARGB(0, 255, 255, 255),
+                ),
+                const Divider(
+                  color: Color.fromARGB(0, 255, 255, 255),
+                  height: 30,
+                ),
+                ButtonLogar(),
+                const Divider(
+                  color: Color.fromARGB(0, 255, 255, 255),
+                ),
+                ButtonCadastrar()
+              ],
+            ),
           ),
         ),
       ),

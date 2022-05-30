@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_final_fields
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:zefyrka/zefyrka.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 
 class FeedAdd extends StatefulWidget {
   const FeedAdd({Key? key}) : super(key: key);
@@ -16,14 +18,14 @@ class _FeedAddPageState extends State<FeedAdd> {
     super.initState();
   }
 
-  final ZefyrController _controller = ZefyrController();
+  QuillController _controller = QuillController.basic();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('CELE - Jguá do Sul'),
-      ),
+          //title: Text('CELE - Jguá do Sul'),
+          ),
       body: Container(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: ListView(
@@ -56,28 +58,17 @@ class _FeedAddPageState extends State<FeedAdd> {
                   setState(() {});
                 },
               ),
-              ZefyrToolbar.basic(
-                  controller: _controller, hideCodeBlock: true, hideLink: true),
-              Expanded(
-                child: ZefyrEditor(
-                  maxHeight: 500,
-                  minHeight: 100,
-                  padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                  controller: _controller,
-                  // onLaunchUrl: _launchUrl,
-                ),
-              ),
-              SizedBox(
-                height: 40,
-                width: 220,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    debugPrint(jsonEncode(_controller.document).toString());
-                  },
-                  icon: const Icon(Icons.publish, size: 25),
-                  label: const Text("Publicar"),
-                ),
-              ),
+              Column(
+                children: [
+                  QuillToolbar.basic(controller: _controller),
+                  Expanded(
+                    child: QuillEditor.basic(
+                      controller: _controller,
+                      readOnly: false, // true for view only mode
+                    ),
+                  )
+                ],
+              )
             ],
           )),
     );
