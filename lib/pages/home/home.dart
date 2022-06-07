@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
 import 'package:flutter/material.dart';
-import 'package:igreja_app/pages/biblia/biblia-page.dart';
 import 'package:igreja_app/pages/configuration/configuration.dart';
 import 'package:igreja_app/pages/feedpage/feed.dart';
 import 'package:igreja_app/pages/live/live.dart';
@@ -23,7 +22,6 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeedPage(),
-    // BibliaPage(),
     LivePage(),
     ConfigurationPage(),
   ];
@@ -39,11 +37,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('CELE - Jaraguá do Sul'),
-        centerTitle: true,
-        toolbarHeight: 30,
-      ),
+      // appBar: AppBar(
+      //   title: const Text('CELE - Jaraguá do Sul'),
+      //   centerTitle: true,
+      //   toolbarHeight: 30,
+      // ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -53,10 +51,6 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.home),
                 label: ('Início'),
                 backgroundColor: Colors.lightBlue),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.bookmark),
-            //     label: ('Bíblia'),
-            //     backgroundColor: Colors.blue),
             BottomNavigationBarItem(
                 icon: Icon(Icons.live_tv),
                 label: ('Ao vivo'),

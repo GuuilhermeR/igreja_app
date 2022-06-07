@@ -81,6 +81,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/
     - assets/98432-loading.json
     - assets/79582-gec-church.json
   # To add assets to your application, add an assets section, like this:

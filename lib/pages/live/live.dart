@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
+// ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -11,8 +11,6 @@ class LivePage extends StatefulWidget {
 }
 
 class _LivePageState extends State<LivePage> {
-  late YoutubePlayerController _controller;
-
   String? videoId = YoutubePlayer.convertUrlToId(
       "https://www.youtube.com/watch?v=BBAyRBTfsOU");
 

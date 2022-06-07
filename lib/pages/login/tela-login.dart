@@ -154,7 +154,8 @@ class _LoginPageState extends State<LoginPage> {
       keyboardType: TextInputType.text,
       obscureText: !passwordVisibility,
       formControlName: 'password',
-      validationMessages: (control) => {'required': 'Campo Obrigatório.'},
+      validationMessages: (control) =>
+          {'required': 'Por favor, informe a senha.'},
       decoration: InputDecoration(
         icon: const Icon(Icons.password),
         labelText: 'Senha',
@@ -180,7 +181,8 @@ class _LoginPageState extends State<LoginPage> {
   ReactiveTextField CampoUsuario() {
     return ReactiveTextField(
       formControlName: 'userId',
-      validationMessages: (control) => {'required': 'Campo Obrigatório.'},
+      validationMessages: (control) =>
+          {'required': 'Por favor, informe o usuário.'},
       textInputAction: TextInputAction.next,
       onSubmitted: () => form.focus('password'),
       decoration: const InputDecoration(
@@ -197,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
   SizedBox CarregarFoto() {
     return SizedBox(
         child: Image.asset(
-      "logo-header.png",
+      "assets/logo-header.png",
       width: 80,
       height: 150,
       fit: BoxFit.scaleDown,
