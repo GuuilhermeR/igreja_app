@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:igreja_app/pages/configuration/configuration.dart';
 import 'package:igreja_app/pages/feedpage/feed.dart';
 import 'package:igreja_app/pages/live/live.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     FeedPage(),
-    LivePage(),
+    // LivePage(),
     ConfigurationPage(),
   ];
 
@@ -37,11 +38,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('CELE - Jaraguá do Sul'),
-      //   centerTitle: true,
-      //   toolbarHeight: 30,
-      // ),
+      appBar: AppBar(
+        title: const Text('CELE - Jaraguá do Sul'),
+        centerTitle: true,
+        toolbarHeight: 30,
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -51,10 +52,10 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.home),
                 label: ('Início'),
                 backgroundColor: Colors.lightBlue),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.live_tv),
-                label: ('Ao vivo'),
-                backgroundColor: Colors.lightBlue),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.live_tv),
+            //     label: ('Ao vivo'),
+            //     backgroundColor: Colors.lightBlue),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
               label: ('Configuração'),

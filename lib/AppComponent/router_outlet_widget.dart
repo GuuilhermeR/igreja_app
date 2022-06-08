@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/AppComponent/router_outlet_controller.dart';
+import 'package:provider/provider.dart';
 
 class RouterOutletWidget extends StatefulWidget {
   const RouterOutletWidget({Key? key}) : super(key: key);
@@ -14,7 +15,8 @@ class RouterOutletWidget extends StatefulWidget {
 class _RouterOutletWidgetState extends State<RouterOutletWidget> {
   @override
   Widget build(BuildContext context) {
-    RouterOutletController controller = context.watch<RouterOutletController>();
+    RouterOutletController controller =
+        Provider.of<RouterOutletController>(context);
 
     return const Scaffold(
       body: RouterOutlet(),
