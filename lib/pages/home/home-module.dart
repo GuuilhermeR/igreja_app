@@ -3,6 +3,7 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/pages/home/home.dart';
 import 'package:igreja_app/pages/login/tela-login-module.dart';
+import 'package:igreja_app/pages/register/register-user-module.dart';
 
 class HomeModule extends Module {
   @override
@@ -10,11 +11,12 @@ class HomeModule extends Module {
 
   @override
   List<Module> get imports => [
-        LoginModule(),
+        RegisterUserModule(),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const HomePage()),
+        ModuleRoute('/login', module: LoginModule()),
       ];
 }
