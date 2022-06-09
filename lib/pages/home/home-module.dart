@@ -10,9 +10,7 @@ class HomeModule extends Module {
   List<Bind> get binds => [];
 
   @override
-  List<Module> get imports => [
-        RegisterUserModule(),
-      ];
+  List<Module> get imports => [];
 
   @override
   List<ModularRoute> get routes => [
