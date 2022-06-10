@@ -1,9 +1,7 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:igreja_app/Models/User/user.dart';
-import 'package:igreja_app/Services/login_service.dart';
-import 'package:igreja_app/Widgets/custom_toast.dart';
 import 'package:igreja_app/services/route_service.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -94,21 +92,29 @@ class _LoginPageState extends State<LoginPage> {
   void logar() {
     form.markAsTouched();
     if (form.valid) {
-      Future.delayed(Duration.zero, () => showAlert(context));
-      User user = User.fromJson(form.value);
-      LoginService _loginService = LoginService();
-      _loginService.login(user).then((value) {
-        if (value != null) {
-          Navigator.of(context).pop();
-          RouteService routeService = RouteService();
-          routeService.home();
+      FirebaseAuth.instance.authStateChanges().listen((User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+        } else {
+          print('User is signed in!');
         }
-      }).catchError((error) {
-        Navigator.of(context).pop();
-        CustomToast.showError(error.toString());
-        return;
       });
-      Navigator.of(context).pop();
+
+      //Future.delayed(Duration.zero, () => showAlert(context));
+      // Usuario user = Usuario.fromJson(form.value);
+      // LoginService _loginService = LoginService();
+      // _loginService.login(user).then((value) {
+      //   if (value != null) {
+      //     Navigator.of(context).pop();
+      //     RouteService routeService = RouteService();
+      //     routeService.home();
+      //   }
+      // }).catchError((error) {
+      //   Navigator.of(context).pop();
+      //   CustomToast.showError(error.toString());
+      //   return;
+      // });
+      // Navigator.of(context).pop();
     }
   }
 

@@ -1,39 +1,39 @@
 {
-    "project_info": {
-      "project_number": "769892937486",
-      "project_id": "siteigrejaluterana",
-      "storage_bucket": "siteigrejaluterana.appspot.com"
-    },
-    "client": [
-      {
-        "client_info": {
-          "mobilesdk_app_id": "1:769892937486:android:2ddbd0e861aef668e1b15f",
-          "android_client_info": {
-            "package_name": "com.igreja.ielb.jaragua"
-          }
-        },
-        "oauth_client": [
-          {
-            "client_id": "769892937486-uhb1a4ab9udf6p35fjgna4amv6g7b1ik.apps.googleusercontent.com",
-            "client_type": 3
-          }
-        ],
-        "api_key": [
-          {
-            "current_key": "AIzaSyAkhHh3VEAv4LiZpGwIqbACm7odgX231Dg"
-          }
-        ],
-        "services": {
-          "appinvite_service": {
-            "other_platform_oauth_client": [
-              {
-                "client_id": "769892937486-uhb1a4ab9udf6p35fjgna4amv6g7b1ik.apps.googleusercontent.com",
-                "client_type": 3
-              }
-            ]
-          }
+  "project_info": {
+    "project_number": "228406102626",
+    "project_id": "igreja-app-base",
+    "storage_bucket": "igreja-app-base.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228406102626:android:8395cca7ba799ff0dfdf3b",
+        "android_client_info": {
+          "package_name": "com.igreja.ielb.jaragua"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228406102626-oj256hr7ng69t4jnh1fuqppf6e8vt1g5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwReW0aoUnk0z-9fDYbMohLFFSvqCyeBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228406102626-oj256hr7ng69t4jnh1fuqppf6e8vt1g5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
-    ],
-    "configuration_version": "1"
-  }
+    }
+  ],
+  "configuration_version": "1"
+}
