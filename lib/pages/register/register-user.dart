@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/Models/User/user.dart';
-import 'package:igreja_app/Services/user_service.dart';
 import 'package:igreja_app/Widgets/custom_toast.dart';
 import 'package:igreja_app/services/route_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -187,7 +187,7 @@ TextFormField dtNascimento() {
 ElevatedButton ButtonCadastrar() {
   return ElevatedButton.icon(
     onPressed: () {
-      registrar();
+      createUser(name: txtNomeController.text, senha: txtSenhaController.text);
     },
     icon: const Icon(Icons.logout, size: 25),
     label: const Text("Cadastrar-se"),
@@ -198,22 +198,35 @@ void goToLogin() {
   Modular.to.navigate('/login/');
 }
 
-void registrar() {
-  User user =
-      User(txtUsuarioController.value.text, txtSenhaController.value.text);
-  if (user.userId.isEmpty) {
-    CustomToast.showError("Informe o usuário!");
-  } else if (user.password.isEmpty) {
-    CustomToast.showError("Informe a senha!");
-  } else {
-    UserService _userService = UserService();
-    try {
-      _userService.createUser(user).then((value) {
-        RouteService routeService = RouteService();
-        routeService.home();
-      });
-    } on Exception catch (error) {
-      CustomToast.showError(error.toString());
-    }
-  }
+//void registrar() {
+// Usuario user =
+//     Usuario(txtUsuarioController.value.text, txtSenhaController.value.text);
+// if (user.userId.isEmpty) {
+//   CustomToast.showError("Informe o usuário!");
+// } else if (user.password.isEmpty) {
+//   CustomToast.showError("Informe a senha!");
+// } else {
+//   UserService _userService = UserService();
+//   try {
+//     _userService.createUser(user).then((value) {
+//       RouteService routeService = RouteService();
+//       routeService.home();
+//     });
+//   } on Exception catch (error) {
+//     CustomToast.showError(error.toString());
+//   }
+// }
+//}
+
+Future createUser({required String name, required String senha}) async {
+  final docUser = FirebaseFirestore.instance
+      .collection('Usuarios')
+      .doc(txtUsuarioController.text);
+
+  final json = {
+    'userId': txtUsuarioController.text,
+    'password': txtSenhaController.text
+  };
+
+  await docUser.set(json);
 }

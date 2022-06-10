@@ -92,14 +92,6 @@ class _LoginPageState extends State<LoginPage> {
   void logar() {
     form.markAsTouched();
     if (form.valid) {
-      FirebaseAuth.instance.authStateChanges().listen((User? user) {
-        if (user == null) {
-          print('User is currently signed out!');
-        } else {
-          print('User is signed in!');
-        }
-      });
-
       //Future.delayed(Duration.zero, () => showAlert(context));
       // Usuario user = Usuario.fromJson(form.value);
       // LoginService _loginService = LoginService();

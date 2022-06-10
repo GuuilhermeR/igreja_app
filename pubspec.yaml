@@ -55,6 +55,7 @@ dependencies:
   flutter_quill: ^2.0.7
   firebase_core: ^1.17.1
   firebase_auth: ^3.3.19
+  cloud_firestore: ^3.1.17
 
 flutter_icons:
   android: "simbolo-rgb.png"
