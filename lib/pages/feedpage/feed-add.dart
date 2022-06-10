@@ -1,8 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/flutter_quill.dart';
-// import 'package:flutter_quill/flutter_quill.dart';
 
 class FeedAdd extends StatefulWidget {
   const FeedAdd({Key? key}) : super(key: key);
@@ -16,8 +14,6 @@ class _FeedAddPageState extends State<FeedAdd> {
   void initState() {
     super.initState();
   }
-
-  QuillController _controller = QuillController.basic();
 
   @override
   Widget build(BuildContext context) {
@@ -57,27 +53,9 @@ class _FeedAddPageState extends State<FeedAdd> {
                 setState(() {});
               },
             ),
-            SafeArea(
-              child: Scaffold(
-                  body: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 38.0),
-                    child: QuillToolbar.basic(controller: _controller),
-                  )
-                ],
-              )),
-            )
           ],
         ),
       ),
     );
   }
 }
-
-// // void _launchUrl(String url) async {
-// //   final result = await canLaunch(url);
-// //   if (result) {
-// //     await launch(url);
-// //   }
-// // }

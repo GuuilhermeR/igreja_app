@@ -19,6 +19,7 @@ class _RouterOutletWidgetState extends State<RouterOutletWidget> {
         Provider.of<RouterOutletController>(context);
 
     return const Scaffold(
+      backgroundColor: Colors.lightBlue,
       body: RouterOutlet(),
     );
   }
