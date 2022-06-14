@@ -2,10 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:igreja_app/Models/User/user.dart';
-import 'package:igreja_app/Widgets/custom_toast.dart';
+import 'package:igreja_app/database.dart';
 import 'package:igreja_app/services/route_service.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -26,6 +24,13 @@ FocusNode focusNodeSenha = FocusNode();
 FocusNode focusDataNascimento = FocusNode();
 
 class _RegisterPageState extends State<RegisterPage> {
+  late Database db;
+  late List docs = [];
+  initialise() {
+    db = Database();
+    db.initialise();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -82,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Color.fromARGB(0, 255, 255, 255),
                 height: 50,
               ),
-              ButtonCadastrar()
+              ButtonCadastrar(db)
             ],
           ),
         ),
@@ -184,10 +189,10 @@ TextFormField dtNascimento() {
   );
 }
 
-ElevatedButton ButtonCadastrar() {
+ElevatedButton ButtonCadastrar(Database db) {
   return ElevatedButton.icon(
     onPressed: () {
-      createUser(name: txtNomeController.text, senha: txtSenhaController.text);
+      //widget.db.create(txtUsuarioController.text, txtSenhaController.text);
     },
     icon: const Icon(Icons.logout, size: 25),
     label: const Text("Cadastrar-se"),
@@ -218,15 +223,3 @@ void goToLogin() {
 // }
 //}
 
-Future createUser({required String name, required String senha}) async {
-  final docUser = FirebaseFirestore.instance
-      .collection('Usuarios')
-      .doc(txtUsuarioController.text);
-
-  final json = {
-    'userId': txtUsuarioController.text,
-    'password': txtSenhaController.text
-  };
-
-  await docUser.set(json);
-}
