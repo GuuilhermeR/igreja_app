@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class Database {
   late FirebaseFirestore firestore;
@@ -10,7 +12,7 @@ class Database {
     try {
       await firestore
           .collection("Usuario")
-          .add({'userId': userId, 'password': passw});
+          .add({'userId': userId, 'password': textToMd5(passw)});
     } catch (e) {
       print(e);
     }
@@ -42,14 +44,18 @@ class Database {
     return docs;
   }
 
-  Future<void> update(String userId, String pass) async {
+  Future<void> update(String userId, String passw) async {
     try {
       await firestore
           .collection("Usuarios")
           .doc(userId)
-          .update({'userId': userId, 'password': pass});
+          .update({'userId': userId, 'password': textToMd5(passw)});
     } catch (e) {
       print(e);
     }
+  }
+
+  String textToMd5(String text) {
+    return md5.convert(utf8.encode(text)).toString();
   }
 }

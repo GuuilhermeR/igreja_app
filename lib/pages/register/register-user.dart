@@ -2,8 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:igreja_app/database.dart';
-import 'package:igreja_app/services/route_service.dart';
+import 'package:igreja_app/database_user.dart';
+import 'package:intl/intl.dart';
+import 'package:lottie/lottie.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -16,16 +19,18 @@ TextEditingController txtNomeController = TextEditingController();
 TextEditingController txtUsuarioController = TextEditingController();
 TextEditingController txtSenhaController = TextEditingController();
 TextEditingController txtDtNascController = TextEditingController();
+
 bool passwordVisibility = false;
 
 FocusNode focusNodeNome = FocusNode();
 FocusNode focusNodeUsuario = FocusNode();
 FocusNode focusNodeSenha = FocusNode();
 FocusNode focusDataNascimento = FocusNode();
+DateTime? selectedDate;
 
 class _RegisterPageState extends State<RegisterPage> {
   late Database db;
-  late List docs = [];
+  List docs = [];
   initialise() {
     db = Database();
     db.initialise();
@@ -39,61 +44,82 @@ class _RegisterPageState extends State<RegisterPage> {
     passwordVisibility = false;
   }
 
+  final form = FormGroup({
+    'userId': FormControl<String>(validators: [Validators.required]),
+    'password': FormControl<String>(validators: [Validators.required]),
+    'dataNascimento': FormControl<DateTime>(value: DateTime.now()),
+  });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cadastro'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            RouteService routeService = RouteService();
-            routeService.login();
-          },
-        ),
-      ),
-      body: GestureDetector(
-        onHorizontalDragUpdate: (details) {
-          if (details.delta.direction <= 0) {
-            RouteService routeService = RouteService();
-            routeService.login();
-          }
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListView(
-            children: <Widget>[
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 70,
-              ),
-              CampoNome(),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 50,
-              ),
-              CampoUsuario(),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 50,
-              ),
-              CampoSenha(),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 50,
-              ),
-              dtNascimento(),
-              const Divider(
-                color: Color.fromARGB(0, 255, 255, 255),
-                height: 50,
-              ),
-              ButtonCadastrar(db)
-            ],
+      backgroundColor: Colors.blue,
+      body: Center(
+        child: Container(
+          width: 500,
+          height: 800,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(4),
+            color: Colors.white,
+          ),
+          margin:
+              const EdgeInsets.only(top: 60, left: 15, right: 15, bottom: 60),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: ListView(
+              children: <Widget>[
+                const Divider(
+                  color: Color.fromARGB(0, 255, 255, 255),
+                  height: 40,
+                ),
+                ReactiveForm(
+                    child: Column(
+                      children: [
+                        CampoNome(),
+                        const Divider(
+                          color: Color.fromARGB(0, 255, 255, 255),
+                          height: 20,
+                        ),
+                        CampoUsuario(),
+                        const Divider(
+                          color: Color.fromARGB(0, 255, 255, 255),
+                          height: 20,
+                        ),
+                        CampoSenha(),
+                        const Divider(
+                          color: Color.fromARGB(0, 255, 255, 255),
+                          height: 20,
+                        ),
+                        CampoNascimento(),
+                      ],
+                    ),
+                    formGroup: form),
+                const Divider(
+                  color: Color.fromARGB(0, 255, 255, 255),
+                  height: 30,
+                ),
+                ButtonCadastrar(),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+}
+
+ReactiveDateTimePicker CampoNascimento() {
+  return ReactiveDateTimePicker(
+    formControlName: 'dataNascimento',
+    type: ReactiveDatePickerFieldType.date,
+    dateFormat: DateFormat("dd/MM/yyyy"),
+    decoration: const InputDecoration(
+      labelText: 'Data Nascmento',
+      helperText: '',
+      border: OutlineInputBorder(),
+      suffixIcon: Icon(Icons.calendar_today),
+    ),
+  );
 }
 
 TextFormField CampoUsuario() {
@@ -189,7 +215,7 @@ TextFormField dtNascimento() {
   );
 }
 
-ElevatedButton ButtonCadastrar(Database db) {
+ElevatedButton ButtonCadastrar() {
   return ElevatedButton.icon(
     onPressed: () {
       //widget.db.create(txtUsuarioController.text, txtSenhaController.text);
@@ -202,24 +228,3 @@ ElevatedButton ButtonCadastrar(Database db) {
 void goToLogin() {
   Modular.to.navigate('/login/');
 }
-
-//void registrar() {
-// Usuario user =
-//     Usuario(txtUsuarioController.value.text, txtSenhaController.value.text);
-// if (user.userId.isEmpty) {
-//   CustomToast.showError("Informe o usuário!");
-// } else if (user.password.isEmpty) {
-//   CustomToast.showError("Informe a senha!");
-// } else {
-//   UserService _userService = UserService();
-//   try {
-//     _userService.createUser(user).then((value) {
-//       RouteService routeService = RouteService();
-//       routeService.home();
-//     });
-//   } on Exception catch (error) {
-//     CustomToast.showError(error.toString());
-//   }
-// }
-//}
-
