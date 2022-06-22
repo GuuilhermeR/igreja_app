@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:igreja_app/database_user.dart';
+import 'package:igreja_app/models/databases/database_user.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -74,6 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 ReactiveForm(
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         CampoNome(),
                         const Divider(
@@ -88,17 +89,19 @@ class _RegisterPageState extends State<RegisterPage> {
                         CampoSenha(),
                         const Divider(
                           color: Color.fromARGB(0, 255, 255, 255),
-                          height: 20,
+                          height: 40,
                         ),
-                        CampoNascimento(),
+                        Container(
+                          child: CampoNascimento(),
+                        ),
                       ],
                     ),
                     formGroup: form),
                 const Divider(
-                  color: Color.fromARGB(0, 255, 255, 255),
+                  color: Color.fromARGB(0, 63, 9, 9),
                   height: 30,
                 ),
-                ButtonCadastrar(),
+                ButtonCadastrar(db),
               ],
             ),
           ),
@@ -116,8 +119,6 @@ ReactiveDateTimePicker CampoNascimento() {
     decoration: const InputDecoration(
       labelText: 'Data Nascmento',
       helperText: '',
-      border: OutlineInputBorder(),
-      suffixIcon: Icon(Icons.calendar_today),
     ),
   );
 }
@@ -130,11 +131,15 @@ TextFormField CampoUsuario() {
         {txtUsuarioController.text.toLowerCase()},
     onEditingComplete: () => {txtUsuarioController.text.toLowerCase()},
     decoration: const InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-        icon: Icon(Icons.person),
-        labelText: 'Usuário',
-        labelStyle: TextStyle(
-            color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 16)),
+      contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      icon: Icon(Icons.person),
+      labelText: 'Usuário',
+      labelStyle: TextStyle(
+        color: Colors.black38,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+      ),
+    ),
   );
 }
 
@@ -145,11 +150,15 @@ TextFormField CampoNome() {
     onFieldSubmitted: (String teste) =>
         {txtUsuarioController.text.toLowerCase()},
     decoration: const InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-        icon: Icon(Icons.person),
-        labelText: 'Nome',
-        labelStyle: TextStyle(
-            color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 16)),
+      contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      icon: Icon(Icons.person),
+      labelText: 'Nome',
+      labelStyle: TextStyle(
+        color: Colors.black38,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+      ),
+    ),
   );
 }
 
@@ -207,20 +216,25 @@ TextFormField dtNascimento() {
     onFieldSubmitted: (String teste) =>
         {txtUsuarioController.text.toLowerCase()},
     decoration: const InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-        icon: Icon(Icons.calendar_month),
-        labelText: 'Data Nascimento',
-        labelStyle: TextStyle(
-            color: Colors.black38, fontWeight: FontWeight.w400, fontSize: 16)),
+      contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+      icon: Icon(Icons.calendar_month),
+      labelText: 'Data Nascimento',
+      labelStyle: TextStyle(
+        color: Colors.black38,
+        fontWeight: FontWeight.w400,
+        fontSize: 16,
+      ),
+    ),
   );
 }
 
-ElevatedButton ButtonCadastrar() {
+ElevatedButton ButtonCadastrar(Database db) {
   return ElevatedButton.icon(
     onPressed: () {
-      //widget.db.create(txtUsuarioController.text, txtSenhaController.text);
+      db.create(txtUsuarioController.text, txtNomeController.text,
+          txtSenhaController.text, txtDtNascController.text);
     },
-    icon: const Icon(Icons.logout, size: 25),
+    icon: const Icon(Icons.logout, size: 30),
     label: const Text("Cadastrar-se"),
   );
 }

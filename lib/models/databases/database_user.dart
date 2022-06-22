@@ -8,11 +8,17 @@ class Database {
     firestore = FirebaseFirestore.instance;
   }
 
-  Future<void> create(String userId, String passw) async {
+  Future<void> create(
+      String userId, String name, String passw, String birth) async {
     try {
-      await firestore
-          .collection("Usuario")
-          .add({'userId': userId, 'password': textToMd5(passw)});
+      await firestore.collection("Usuario").add(
+        {
+          'userId': userId,
+          'password': textToMd5(passw),
+          'name': name,
+          'birth': birth,
+        },
+      );
     } catch (e) {
       print(e);
     }
