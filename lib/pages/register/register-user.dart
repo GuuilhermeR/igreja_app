@@ -2,9 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:igreja_app/models/databases/database_user.dart';
 import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
 
@@ -29,13 +27,6 @@ FocusNode focusDataNascimento = FocusNode();
 DateTime? selectedDate;
 
 class _RegisterPageState extends State<RegisterPage> {
-  late Database db;
-  List docs = [];
-  initialise() {
-    db = Database();
-    db.initialise();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -101,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   color: Color.fromARGB(0, 63, 9, 9),
                   height: 30,
                 ),
-                ButtonCadastrar(db),
+                ButtonCadastrar(),
               ],
             ),
           ),
@@ -228,13 +219,16 @@ TextFormField dtNascimento() {
   );
 }
 
-ElevatedButton ButtonCadastrar(Database db) {
+ElevatedButton ButtonCadastrar() {
   return ElevatedButton.icon(
     onPressed: () {
-      db.create(txtUsuarioController.text, txtNomeController.text,
-          txtSenhaController.text, txtDtNascController.text);
+      // widget.db.create(txtUsuarioController.text, txtNomeController.text,
+      //     txtSenhaController.text, txtDtNascController.text);
     },
-    icon: const Icon(Icons.logout, size: 30),
+    icon: const Icon(
+      Icons.logout,
+      size: 30,
+    ),
     label: const Text("Cadastrar-se"),
   );
 }
