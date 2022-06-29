@@ -67,10 +67,7 @@ class _FeedPageState extends State<FeedPage> {
         onRefresh: getFeed,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          RouteService routeService = RouteService();
-          routeService.feedAdd();
-        },
+        onPressed: () => RouteService.feedAdd(),
         backgroundColor: Colors.lightBlue,
         child: const Icon(Icons.add),
       ),

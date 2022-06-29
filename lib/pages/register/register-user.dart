@@ -2,9 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:igreja_app/base_model.dart';
+import 'package:igreja_app/models/user/user.dart';
+import 'package:igreja_app/services/route_service.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -222,8 +227,8 @@ TextFormField dtNascimento() {
 ElevatedButton ButtonCadastrar() {
   return ElevatedButton.icon(
     onPressed: () {
-      // widget.db.create(txtUsuarioController.text, txtNomeController.text,
-      //     txtSenhaController.text, txtDtNascController.text);
+      Usuario(txtUsuarioController.text, textToMd5(txtSenhaController.text),
+          txtNomeController.text, txtDtNascController.text);
     },
     icon: const Icon(
       Icons.logout,
@@ -234,5 +239,9 @@ ElevatedButton ButtonCadastrar() {
 }
 
 void goToLogin() {
-  Modular.to.navigate('/login/');
+  RouteService.login();
+}
+
+String textToMd5(String text) {
+  return md5.convert(utf8.encode(text)).toString();
 }

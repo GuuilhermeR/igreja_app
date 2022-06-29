@@ -99,8 +99,7 @@ class _LoginPageState extends State<LoginPage> {
       // _loginService.login(user).then((value) {
       //   if (value != null) {
       //     Navigator.of(context).pop();
-      //     RouteService routeService = RouteService();
-      //     routeService.home();
+      //     RouteService.home();
       //   }
       // }).catchError((error) {
       //   Navigator.of(context).pop();
@@ -139,8 +138,7 @@ class _LoginPageState extends State<LoginPage> {
       width: 220,
       child: ElevatedButton.icon(
         onPressed: () {
-          RouteService routeService = RouteService();
-          routeService.registerUser();
+          RouteService.registerUser();
         },
         icon: const Icon(Icons.logout, size: 25),
         label: const Text("Cadastrar-se"),

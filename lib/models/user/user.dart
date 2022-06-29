@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypto/crypto.dart';
 import 'package:igreja_app/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -10,15 +13,15 @@ class Usuario extends BaseModel {
   late String password;
   late String birthDate;
 
-  Usuario();
+  Usuario(userId, password, [name, birthDate]);
 
   Usuario.fromMap(DocumentSnapshot document) {
     _documentId = document.id;
 
-    userId = document.data["userId"];
-    name = document.data["name"];
-    password = document.data["password"];
-    birthDate = document.data["birthDate"];
+    userId = document['userId'] ?? '';
+    name = document['name'] ?? '';
+    password = document['password'] ?? '';
+    birthDate = document['birthDate'] ?? '';
   }
 
   @override
@@ -33,4 +36,8 @@ class Usuario extends BaseModel {
 
   @override
   String documentId() => _documentId;
+
+  String textToMd5(String text) {
+    return md5.convert(utf8.encode(text)).toString();
+  }
 }

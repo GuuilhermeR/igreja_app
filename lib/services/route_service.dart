@@ -1,23 +1,23 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 class RouteService {
-  void logout() {
+  static void logout() {
     Modular.to.navigate('/login/');
   }
 
-  void login() {
+  static void login() {
     Modular.to.navigate('/login/');
   }
 
-  void registerUser() {
+  static void registerUser() {
     Modular.to.navigate('/register-user/');
   }
 
-  void home() {
+  static void home() {
     Modular.to.navigate('/home/');
   }
 
-  void feedAdd() {
+  static void feedAdd() {
     Modular.to.navigate('/feed-add/');
   }
 }
