@@ -50,6 +50,17 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blue,
+      appBar: AppBar(
+        title: const Text('Cadastrar'),
+        centerTitle: true,
+        toolbarHeight: 50,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            RouteService.login();
+          },
+        ),
+      ),
       body: Center(
         child: Container(
           width: 500,
@@ -236,10 +247,6 @@ ElevatedButton ButtonCadastrar() {
     ),
     label: const Text("Cadastrar-se"),
   );
-}
-
-void goToLogin() {
-  RouteService.login();
 }
 
 String textToMd5(String text) {
