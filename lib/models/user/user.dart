@@ -2,12 +2,10 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypto/crypto.dart';
-import 'package:igreja_app/base_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
-class Usuario extends BaseModel {
-  late String _documentId;
+class Usuario {
   late String userId;
   late String name;
   late String password;
@@ -15,27 +13,20 @@ class Usuario extends BaseModel {
 
   Usuario(userId, password, [name, birthDate]);
 
-  Usuario.fromMap(DocumentSnapshot document) {
-    _documentId = document.id;
+  Usuario.fromMap(Map snapshot, String id)
+      : userId = id,
+        name = snapshot['name'] ?? '',
+        password = snapshot['password'] ?? '',
+        birthDate = snapshot['birthDate'] ?? '';
 
-    userId = document['userId'] ?? '';
-    name = document['name'] ?? '';
-    password = document['password'] ?? '';
-    birthDate = document['birthDate'] ?? '';
+  toJson() {
+    return {
+      "userId": userId,
+      "name": name,
+      "password": password,
+      "birthDate": birthDate,
+    };
   }
-
-  @override
-  toMap() {
-    var map = <String, dynamic>{};
-    map['userId'] = userId;
-    map['name'] = name;
-    map['password'] = password;
-    map['password'] = birthDate;
-    return map;
-  }
-
-  @override
-  String documentId() => _documentId;
 
   String textToMd5(String text) {
     return md5.convert(utf8.encode(text)).toString();

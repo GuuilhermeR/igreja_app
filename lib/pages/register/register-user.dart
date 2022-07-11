@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, non_constant_identifier_names, file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:igreja_app/base_model.dart';
 import 'package:igreja_app/models/user/user.dart';
 import 'package:igreja_app/services/route_service.dart';
 import 'package:intl/intl.dart';
