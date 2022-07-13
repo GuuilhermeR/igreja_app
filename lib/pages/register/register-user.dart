@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, non_constant_identifier_names, file_names
 
 import 'package:flutter/material.dart';
-import 'package:igreja_app/models/user/user.dart';
+import 'package:igreja_app/models/user/models/user.dart';
 import 'package:igreja_app/services/route_service.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -236,7 +236,7 @@ TextFormField dtNascimento() {
 ElevatedButton ButtonCadastrar() {
   return ElevatedButton.icon(
     onPressed: () {
-      Usuario(txtUsuarioController.text, textToMd5(txtSenhaController.text),
+      User(txtUsuarioController.text, textToMd5(txtSenhaController.text),
           txtNomeController.text, txtDtNascController.text);
     },
     icon: const Icon(

@@ -5,16 +5,16 @@ import 'package:crypto/crypto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
-class Usuario {
+class User {
   late String userId;
   late String name;
   late String password;
   late String birthDate;
 
-  Usuario(userId, password, [name, birthDate]);
+  User(userId, password, [name, birthDate]);
 
-  Usuario.fromMap(Map snapshot, String id)
-      : userId = id,
+  User.fromMap(Map snapshot)
+      : userId = snapshot['userId'] ?? '',
         name = snapshot['name'] ?? '',
         password = snapshot['password'] ?? '',
         birthDate = snapshot['birthDate'] ?? '';

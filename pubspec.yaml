@@ -54,11 +54,11 @@ dependencies:
   youtube_player_flutter: ^8.0.0
   flutter_quill: ^2.0.7
   firebase_core: ^1.17.1
-  firebase_auth: ^3.3.19
   cloud_firestore: ^3.1.17
   crypto: ^3.0.0
   reactive_date_time_picker: ^0.3.0
   intl: ^0.17.0
+  get_it: ^7.2.0
 
 flutter_icons:
   android: "simbolo-rgb.png"
