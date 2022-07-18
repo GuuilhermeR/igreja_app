@@ -2,8 +2,15 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:igreja_app/models/user/user.dart';
+import 'package:igreja_app/services/jwt_service.dart';
+import 'package:igreja_app/services/login_service.dart';
 import 'package:igreja_app/services/route_service.dart';
+import 'package:igreja_app/state/user_state.dart';
+import 'package:igreja_app/widgets/custom_toast.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LoginPage extends StatefulWidget {
@@ -92,19 +99,26 @@ class _LoginPageState extends State<LoginPage> {
   void logar() {
     form.markAsTouched();
     if (form.valid) {
-      //Future.delayed(Duration.zero, () => showAlert(context));
-      // Usuario user = Usuario.fromJson(form.value);
-      // LoginService _loginService = LoginService();
-      // _loginService.login(user).then((value) {
-      //   if (value != null) {
-      //     Navigator.of(context).pop();
-      //     RouteService.home();
-      //   }
-      // }).catchError((error) {
-      //   Navigator.of(context).pop();
-      //   CustomToast.showError(error.toString());
-      //   return;
-      // });
+      Future.delayed(Duration.zero, () => showAlert(context));
+      User user = User.fromJson(form.value);
+      LoginService _loginService = LoginService();
+      _loginService.login(user, context).then((value) {
+        if (value != null) {
+          Provider.of<UserState>(context, listen: false).changeLoginState(true);
+          JwtService().getToken().then((jwtToken) {
+            if (jwtToken != null) {
+              Map<String, dynamic> decodedToken = JwtDecoder.decode(jwtToken);
+              User tokenUser = User(decodedToken["UserId"], "");
+              Provider.of<UserState>(context, listen: false).setUser(tokenUser);
+            }
+          });
+          RouteService().home();
+        }
+      }).catchError((error) {
+        Navigator.of(context).pop();
+        CustomToast.showError(error.toString(), context);
+        return;
+      });
       // Navigator.of(context).pop();
     }
   }
