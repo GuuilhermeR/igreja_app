@@ -18,6 +18,7 @@ class LoginRepository {
       user,
       context,
     );
+    debugPrint("response: " + response.toString());
     if (response.statusCode == 200) {
       JwtService jwtService = JwtService();
       jwtService.removeToken();

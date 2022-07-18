@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:igreja_app/AppComponent/router_outlet_controller.dart';
+import 'package:igreja_app/state/user_state.dart';
 import 'package:provider/provider.dart';
 
 class AppWidget extends StatelessWidget {
@@ -10,7 +10,9 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => RouterOutletController())
+        ChangeNotifierProvider(
+          create: (_) => UserState(),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

@@ -1,6 +1,5 @@
 // ignore_for_file: file_names, non_constant_identifier_names, deprecated_member_use
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:igreja_app/models/user/user.dart';
 import 'package:igreja_app/services/jwt_service.dart';

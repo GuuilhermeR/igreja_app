@@ -3,7 +3,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:igreja_app/pages/home/home.dart';
 import 'package:igreja_app/pages/login/tela-login-module.dart';
-import 'package:igreja_app/pages/register/register-user-module.dart';
 
 class HomeModule extends Module {
   @override
