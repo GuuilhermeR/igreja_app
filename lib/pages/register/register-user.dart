@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, non_constant_identifier_names, file_names
 
 import 'package:flutter/material.dart';
-import 'package:igreja_app/models/user/models/user.dart';
+import 'package:igreja_app/models/user/user.dart';
 import 'package:igreja_app/services/route_service.dart';
+import 'package:igreja_app/services/user_service.dart';
+import 'package:igreja_app/widgets/custom_toast.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_date_time_picker/reactive_date_time_picker.dart';
@@ -55,7 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            RouteService.login();
+            RouteService().login();
           },
         ),
       ),
@@ -235,10 +237,7 @@ TextFormField dtNascimento() {
 
 ElevatedButton ButtonCadastrar() {
   return ElevatedButton.icon(
-    onPressed: () {
-      User(txtUsuarioController.text, textToMd5(txtSenhaController.text),
-          txtNomeController.text, txtDtNascController.text);
-    },
+    onPressed: () {},
     icon: const Icon(
       Icons.logout,
       size: 30,
@@ -247,6 +246,21 @@ ElevatedButton ButtonCadastrar() {
   );
 }
 
-String textToMd5(String text) {
-  return md5.convert(utf8.encode(text)).toString();
+void registrar(BuildContext context) {
+  User user =
+      User(txtUsuarioController.value.text, txtSenhaController.value.text);
+  if (user.userId.isEmpty) {
+    CustomToast.showError("Informe o usuário!", context);
+  } else if (user.password.isEmpty) {
+    CustomToast.showError("Informe a senha!", context);
+  } else {
+    UserService _userService = UserService();
+    try {
+      _userService.createUser(user, context).then((value) {
+        RouteService().login();
+      });
+    } on Exception catch (error) {
+      CustomToast.showError(error.toString(), context);
+    }
+  }
 }

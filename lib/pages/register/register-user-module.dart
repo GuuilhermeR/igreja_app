@@ -8,9 +8,6 @@ class RegisterUserModule extends Module {
   List<Bind> get binds => [];
 
   @override
-  List<Module> get imports => [];
-
-  @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const RegisterPage()),
       ];

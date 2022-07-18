@@ -59,6 +59,7 @@ dependencies:
   reactive_date_time_picker: ^0.3.0
   intl: ^0.17.0
   get_it: ^7.2.0
+  jwt_decoder: ^2.0.1
 
 flutter_icons:
   android: "simbolo-rgb.png"

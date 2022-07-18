@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
       width: 220,
       child: ElevatedButton.icon(
         onPressed: () {
-          RouteService.registerUser();
+          RouteService().registerUser();
         },
         icon: const Icon(Icons.logout, size: 25),
         label: const Text("Cadastrar-se"),

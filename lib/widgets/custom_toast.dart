@@ -1,44 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class CustomToast {
-  static Future<bool?> showSucess(String message) {
-    return Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.lightGreen,
-      textColor: Colors.white,
-      fontSize: 24,
-      timeInSecForIosWeb: 10,
-    );
+  static showSucess(String message, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Colors.green,
+      duration: const Duration(seconds: 10),
+      content: Text(message),
+    ));
   }
 
-  static Future<bool?> showError(String message) {
-    return Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        webBgColor: "linear-gradient(to right, #F03801, #EB1C01)",
-        backgroundColor: Colors.red,
-        webPosition: "bottom",
-        textColor: Colors.white,
-        fontSize: 12,
-        timeInSecForIosWeb: 10,
-        webShowClose: true);
+  static showError(String message, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Colors.red,
+      duration: const Duration(seconds: 10),
+      content: Text(message),
+    ));
   }
 
-  static Future<bool?> showWarning(String message) {
-    return Fluttertoast.showToast(
-        msg: message,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.BOTTOM,
-        webBgColor: "linear-gradient(to right, #F5E9A1, #EFC538)",
-        backgroundColor: Colors.yellowAccent,
-        webPosition: "right",
-        textColor: Colors.white,
-        fontSize: 24,
-        timeInSecForIosWeb: 10,
-        webShowClose: true);
+  static showWarning(String message, BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Colors.amber,
+      duration: const Duration(seconds: 10),
+      content: Text(message),
+    ));
   }
 }
