@@ -132,8 +132,8 @@ class _LoginPageState extends State<LoginPage> {
 
   SizedBox ButtonLogar() {
     return SizedBox(
-      height: 40,
-      width: 220,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.05,
       child: ElevatedButton.icon(
         onPressed: () {
           form.valid ? logar() : null;
@@ -146,8 +146,8 @@ class _LoginPageState extends State<LoginPage> {
 
   SizedBox ButtonCadastrar() {
     return SizedBox(
-      height: 40,
-      width: 220,
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.05,
       child: ElevatedButton.icon(
         onPressed: () {
           RouteService().registerUser();

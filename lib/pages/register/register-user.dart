@@ -67,8 +67,12 @@ class _RegisterPageState extends State<RegisterPage> {
             borderRadius: BorderRadius.circular(4),
             color: Colors.white,
           ),
-          margin:
-              const EdgeInsets.only(top: 60, left: 15, right: 15, bottom: 60),
+          margin: const EdgeInsets.only(
+            top: 60,
+            left: 15,
+            right: 15,
+            bottom: 60,
+          ),
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: ListView(
@@ -81,24 +85,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CampoNome(),
-                        const Divider(
-                          color: Color.fromARGB(0, 255, 255, 255),
-                          height: 20,
-                        ),
                         CampoUsuario(),
                         const Divider(
                           color: Color.fromARGB(0, 255, 255, 255),
                           height: 20,
                         ),
                         CampoSenha(),
-                        const Divider(
-                          color: Color.fromARGB(0, 255, 255, 255),
-                          height: 40,
-                        ),
-                        Container(
-                          child: CampoNascimento(),
-                        ),
                       ],
                     ),
                     formGroup: form),
@@ -106,7 +98,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   color: Color.fromARGB(0, 63, 9, 9),
                   height: 30,
                 ),
-                ButtonCadastrar(),
+                ButtonCadastrar(context),
               ],
             ),
           ),
@@ -198,18 +190,6 @@ TextFormField CampoSenha() {
           topRight: Radius.circular(4.0),
         ),
       ),
-      // suffixIcon: InkWell(
-      //   // onTap: () => setState(
-      //   //   () => passwordVisibility = !passwordVisibility,
-      //   // ),
-      //   child: Icon(
-      //     passwordVisibility
-      //         ? Icons.visibility_outlined
-      //         : Icons.visibility_off_outlined,
-      //     color: const Color(0xFF757575),
-      //     size: 22,
-      //   ),
-      // ),
     ),
   );
 }
@@ -233,14 +213,17 @@ TextFormField dtNascimento() {
   );
 }
 
-ElevatedButton ButtonCadastrar() {
-  return ElevatedButton.icon(
-    onPressed: () {},
-    icon: const Icon(
-      Icons.logout,
-      size: 30,
+SizedBox ButtonCadastrar(BuildContext context) {
+  return SizedBox(
+    width: MediaQuery.of(context).size.width,
+    height: MediaQuery.of(context).size.height * 0.05,
+    child: ElevatedButton.icon(
+      onPressed: () {
+        RouteService().registerUser();
+      },
+      icon: const Icon(Icons.logout, size: 25),
+      label: const Text("Cadastrar-se"),
     ),
-    label: const Text("Cadastrar-se"),
   );
 }
 
