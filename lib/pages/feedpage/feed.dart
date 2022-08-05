@@ -11,6 +11,8 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
+  final items = List<String>.generate(20, (i) => 'Item ${i + 1}');
+
   @override
   void initState() {
     super.initState();
@@ -21,47 +23,23 @@ class _FeedPageState extends State<FeedPage> {
     return Scaffold(
       body: RefreshIndicator(
         child: ListView.builder(
-          itemCount: 4,
+          itemCount: items.length,
           itemBuilder: (context, index) {
-            return ListTile(
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Text("Imagem"),
-                  ],
-                ),
-                subtitle: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Spacer(),
-                    Text("Olá, isso é um teste"),
-                  ],
-                ),
-                onLongPress: () {
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      title: const Text('Aviso'),
-                      content: const Text('Você deseja excluir essa postagem?'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Não'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context, 'OK');
-                            //deletar - apenas adm pode.
-                          },
-                          child: const Text('Sim'),
-                        ),
-                      ],
-                    ),
-                  );
-                } //
-                );
+            final item = items[index];
+            return Dismissible(
+              key: Key(item),
+              onDismissed: (direction) {
+                setState(() {
+                  items.removeAt(index);
+                });
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text('$item removido')));
+              },
+              background: Container(color: Colors.red),
+              child: ListTile(
+                title: Text(item),
+              ),
+            );
           },
         ),
         onRefresh: getFeed,
