@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:igreja_app/pages/configuration/configuration.dart';
 import 'package:igreja_app/pages/feedpage/feed.dart';
-import 'package:igreja_app/pages/live/live.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

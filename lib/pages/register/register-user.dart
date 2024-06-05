@@ -108,17 +108,17 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 }
 
-ReactiveDateTimePicker CampoNascimento() {
-  return ReactiveDateTimePicker(
-    formControlName: 'dataNascimento',
-    type: ReactiveDatePickerFieldType.date,
-    dateFormat: DateFormat("dd/MM/yyyy"),
-    decoration: const InputDecoration(
-      labelText: 'Data Nascmento',
-      helperText: '',
-    ),
-  );
-}
+// ReactiveDateTimePicker CampoNascimento() {
+//   return ReactiveDateTimePicker(
+//     formControlName: 'dataNascimento',
+//     type: ReactiveDatePickerFieldType.date,
+//     dateFormat: DateFormat("dd/MM/yyyy"),
+//     decoration: const InputDecoration(
+//       labelText: 'Data Nascmento',
+//       helperText: '',
+//     ),
+//   );
+// }
 
 TextFormField CampoUsuario() {
   return TextFormField(
@@ -194,24 +194,24 @@ TextFormField CampoSenha() {
   );
 }
 
-TextFormField dtNascimento() {
-  return TextFormField(
-    keyboardType: TextInputType.datetime,
-    controller: txtDtNascController,
-    onFieldSubmitted: (String teste) =>
-        {txtUsuarioController.text.toLowerCase()},
-    decoration: const InputDecoration(
-      contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-      icon: Icon(Icons.calendar_month),
-      labelText: 'Data Nascimento',
-      labelStyle: TextStyle(
-        color: Colors.black38,
-        fontWeight: FontWeight.w400,
-        fontSize: 16,
-      ),
-    ),
-  );
-}
+// TextFormField dtNascimento() {
+//   return TextFormField(
+//     keyboardType: TextInputType.datetime,
+//     controller: txtDtNascController,
+//     onFieldSubmitted: (String teste) =>
+//         {txtUsuarioController.text.toLowerCase()},
+//     decoration: const InputDecoration(
+//       contentPadding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+//       icon: Icon(Icons.calendar_month),
+//       labelText: 'Data Nascimento',
+//       labelStyle: TextStyle(
+//         color: Colors.black38,
+//         fontWeight: FontWeight.w400,
+//         fontSize: 16,
+//       ),
+//     ),
+//   );
+// }
 
 SizedBox ButtonCadastrar(BuildContext context) {
   return SizedBox(
